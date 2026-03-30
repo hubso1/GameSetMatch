@@ -85,7 +85,7 @@ fun GlownyScreen(viewModel: GlownaViewModel = viewModel(),
             Text(trening, fontSize = 20.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(5.dp))
             IconButton(
                 onClick = { navController.navigate(NavItem.Nauka.route) },
-
+                Modifier.size(45.dp)
                 ) {
                 Icon(
                     Icons.Outlined.ArrowCircleRight,

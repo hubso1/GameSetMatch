@@ -19,7 +19,7 @@ fun AppNavHost(navController: NavHostController) {
         startDestination = NavItem.Glowna.route
     ) {
         composable(NavItem.Glowna.route) { GlownyScreen(navController = navController) }
-        composable(NavItem.Nauka.route) { NaukaScreen() }
+        composable(NavItem.Nauka.route) { NaukaScreen(navController = navController)}
         composable(NavItem.Mecze.route) { MeczeScreen() }
         composable(NavItem.Sprzet.route) { SprzetScreen() }
         composable(NavItem.Zasady.route) { ZasadyScreen() }
