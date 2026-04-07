@@ -6,6 +6,8 @@ import com.example.gamesetmatch.data.AppDatabase
 import com.example.gamesetmatch.data.MeczRepository
 
 class GameSetMatchApp : Application() {
-    val database by lazy { Room.databaseBuilder(this, AppDatabase::class.java, "tennis_db").build() }
+    val database by lazy { Room.databaseBuilder(this, AppDatabase::class.java, "tennis_db")
+        .fallbackToDestructiveMigration()
+        .build() }
     val repository by lazy { MeczRepository(database.meczDao()) }
 }

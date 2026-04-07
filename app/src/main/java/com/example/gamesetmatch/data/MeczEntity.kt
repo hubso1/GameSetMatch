@@ -9,5 +9,6 @@ data class MeczEntity(
     val id: Int = 0,
     val przeciwnik: String,
     val wynik: String,
-    val data: String
+    val data: String,
+    val czyWygrany: Boolean
 )
