@@ -25,14 +25,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.example.gamesetmatch.usr.nav.NavItem
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
-fun GlownyScreen(viewModel: GlownaViewModel = viewModel(),
-                 navController: NavHostController
+fun GlownyScreen(viewModel: GlownaViewModel,
+                 onNavigateToMecze: () -> Unit,
+                 onNavigateToUStawienia: () -> Unit
                  ) {
 
     val hi = viewModel.hi
@@ -61,7 +59,7 @@ fun GlownyScreen(viewModel: GlownaViewModel = viewModel(),
             }
 
             IconButton(
-                onClick = { navController.navigate("mecze") },
+                onClick = onNavigateToUStawienia ,
 
                 ) {
                 Icon(
@@ -84,7 +82,7 @@ fun GlownyScreen(viewModel: GlownaViewModel = viewModel(),
         ) {
             Text(trening, fontSize = 20.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(5.dp))
             IconButton(
-                onClick = { navController.navigate(NavItem.Nauka.route) },
+                onClick = onNavigateToMecze,
                 Modifier.size(45.dp)
                 ) {
                 Icon(
@@ -104,6 +102,8 @@ fun GlownyScreen(viewModel: GlownaViewModel = viewModel(),
 @Preview(showBackground = true )
 @Composable
 fun Compose_test(){
-    val navController = rememberNavController()
-    GlownyScreen(navController = navController)
+    val vm: GlownaViewModel = hiltViewModel()
+    GlownyScreen(viewModel = vm,onNavigateToMecze = {},
+        onNavigateToUStawienia = {})
+
 }

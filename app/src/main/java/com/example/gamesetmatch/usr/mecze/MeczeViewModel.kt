@@ -5,9 +5,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.gamesetmatch.data.MeczEntity
 import com.example.gamesetmatch.data.MeczRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.launch
 
-class MeczeViewModel(private val repository: MeczRepository) : ViewModel() {
+@HiltViewModel
+class MeczeViewModel @Inject constructor(
+    private val repository: MeczRepository
+) : ViewModel() {
+
+
     val allMatches = repository.allMatches
 
     // Główna funkcja z logiką walidacji

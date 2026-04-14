@@ -1,8 +1,9 @@
 package com.example.gamesetmatch.data
 
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class MeczRepository(private val meczDao: MeczDao) {
+class MeczRepository @Inject constructor(private val meczDao: MeczDao) {
     val allMatches: Flow<List<MeczEntity>> = meczDao.getAllMatches()
 
     suspend fun addMatch(mecz: MeczEntity) {
