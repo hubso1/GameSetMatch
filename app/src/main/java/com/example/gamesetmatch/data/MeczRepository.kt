@@ -5,6 +5,7 @@ import javax.inject.Inject
 
 class MeczRepository @Inject constructor(private val meczDao: MeczDao) {
     val allMatches: Flow<List<MeczEntity>> = meczDao.getAllMatches()
+    val lastMatch: Flow<MeczEntity?> = meczDao.getLastMatch()
 
     suspend fun addMatch(mecz: MeczEntity) {
         meczDao.insertMatch(mecz)

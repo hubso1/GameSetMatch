@@ -1,4 +1,4 @@
-package com.example.gamesetmatch.data.sprzet
+package com.example.gamesetmatch.data.user
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

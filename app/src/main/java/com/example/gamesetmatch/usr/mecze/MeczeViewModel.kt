@@ -1,7 +1,6 @@
 package com.example.gamesetmatch.usr.mecze
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.gamesetmatch.data.MeczEntity
 import com.example.gamesetmatch.data.MeczRepository
@@ -79,13 +78,5 @@ class MeczeViewModel @Inject constructor(
         }
     }
 
-    class Factory(private val repository: MeczRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(MeczeViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return MeczeViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
-    }
+
 }

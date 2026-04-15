@@ -65,8 +65,15 @@ fun SetGlownyScreen(viewModel: GlownaViewModel,
             .fillMaxSize()
         ) {
             Text("Użytkownik", fontSize = 16.sp, fontWeight = FontWeight.Bold)
-
-
+            TextField(
+                value = viewModel.name,
+                onValueChange = {text ->
+                    viewModel.nameChange(text)
+                },
+                label = { Text("Nazwa") },
+                modifier = Modifier.fillMaxWidth()
+                    .padding(16.dp)
+            )
             Spacer(Modifier.height(20.dp))
             Text("Sprzęt", fontSize = 16.sp, fontWeight = FontWeight.Bold)
 
@@ -90,7 +97,9 @@ fun SetGlownyScreen(viewModel: GlownaViewModel,
                 modifier = Modifier.background(color = Color(0xFFCBFF5B), shape = RoundedCornerShape(16.dp))
                     .padding(16.dp)
                     .fillMaxWidth()
-                    .clickable(onClick = {}),
+                    .clickable(onClick = {
+                        viewModel.nameSave()
+                    }),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,
 

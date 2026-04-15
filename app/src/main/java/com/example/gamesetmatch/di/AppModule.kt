@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.example.gamesetmatch.data.AppDatabase
 import com.example.gamesetmatch.data.MeczDao
-import com.example.gamesetmatch.data.sprzet.UserDao
+import com.example.gamesetmatch.data.user.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

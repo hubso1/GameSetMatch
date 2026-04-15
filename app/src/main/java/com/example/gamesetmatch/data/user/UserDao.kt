@@ -1,4 +1,4 @@
-package com.example.gamesetmatch.data.sprzet
+package com.example.gamesetmatch.data.user
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface UserDao{
 
     @Query("Select * From user where id = 0")
-    fun getUser(): Flow<UserEntity>
+    fun getUser(): Flow<UserEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveUser(user: UserEntity)
