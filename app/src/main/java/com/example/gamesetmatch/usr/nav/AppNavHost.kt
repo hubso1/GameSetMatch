@@ -15,6 +15,7 @@ import com.example.gamesetmatch.usr.mecze.MeczeScreen
 import com.example.gamesetmatch.usr.mecze.MeczeViewModel
 import com.example.gamesetmatch.usr.nauka.NaukaScreen
 import com.example.gamesetmatch.usr.sprzet.SprzetScreen
+import com.example.gamesetmatch.usr.sprzet.SprzetViewModel
 import com.example.gamesetmatch.usr.zasady.ZasadyScreen
 
 @Composable
@@ -40,7 +41,12 @@ fun AppNavHost(navController: NavHostController) {
                 onNavigateBack = { navController.popBackStack() }
             )
         }
-        composable(NavItem.Nauka.route) { NaukaScreen(navController = navController)}
+        composable(NavItem.Nauka.route) { NaukaScreen(
+            onNavigatetoForehand = { navController.navigate("sprzet")},
+            onNavigatetoBackhand = { navController.navigate("sprzet")},
+            onNavigatetoSerwis = {navController.navigate("sprzet")}
+        )
+        }
 
         composable(NavItem.Mecze.route) {
             val vm: MeczeViewModel = hiltViewModel()
@@ -58,7 +64,10 @@ fun AppNavHost(navController: NavHostController) {
             )
         }
 
-        composable(NavItem.Sprzet.route) { SprzetScreen() }
+        composable(NavItem.Sprzet.route) {
+            val vm : SprzetViewModel = hiltViewModel()
+            SprzetScreen(viewModel = vm)
+        }
         composable(NavItem.Zasady.route) { ZasadyScreen() }
     }
 }

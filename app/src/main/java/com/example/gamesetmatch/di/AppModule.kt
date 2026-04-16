@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.example.gamesetmatch.data.AppDatabase
 import com.example.gamesetmatch.data.MeczDao
+import com.example.gamesetmatch.data.sprzet.SprzetDao
 import com.example.gamesetmatch.data.user.UserDao
 import dagger.Module
 import dagger.Provides
@@ -27,5 +28,8 @@ object AppModule {
 
     @Provides
     fun provideMeczDao(db: AppDatabase): MeczDao = db.meczDao()
+
+    @Provides
+    fun provideSprzetDao(db: AppDatabase): SprzetDao = db.sprzetDao()
 
 }

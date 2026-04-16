@@ -33,7 +33,10 @@ import com.example.gamesetmatch.usr.nav.NavItem
 @Composable
 fun NaukaScreen(
     viewModel: NaukaViewModel = viewModel(),
-    navController: NavHostController
+    onNavigatetoForehand: () -> Unit,
+    onNavigatetoBackhand: () -> Unit,
+    onNavigatetoSerwis: () -> Unit
+
 ) {
     val nauka = viewModel.nauka
     val first = viewModel.first
@@ -62,7 +65,7 @@ fun NaukaScreen(
         ) {
             Text(first,fontSize = 30.sp,color = Color(0xFFFFFFFF))
             IconButton(
-                onClick = { navController.navigate(NavItem.Glowna.route) },
+                onClick = onNavigatetoForehand,
                 modifier = Modifier.size(50.dp)
 
             ) {
@@ -86,7 +89,7 @@ fun NaukaScreen(
         ) {
             Text(second,fontSize = 30.sp,color = Color(0xFFFFFFFF))
             IconButton(
-                onClick = { navController.navigate(NavItem.Glowna.route) },
+                onClick = onNavigatetoBackhand,
                 modifier = Modifier.size(50.dp)
             ) {
                 Icon(
@@ -109,7 +112,7 @@ fun NaukaScreen(
         ) {
             Text(third,fontSize = 30.sp,color = Color(0xFFFFFFFF))
             IconButton(
-                onClick = { navController.navigate(NavItem.Glowna.route) },
+                onClick = onNavigatetoSerwis,
                 modifier = Modifier.size(50.dp)
             ) {
                 Icon(
@@ -131,6 +134,8 @@ fun NaukaScreen(
 @Composable
 fun Compose_test(){
     val navController = rememberNavController()
-    NaukaScreen(navController = navController)
+    NaukaScreen(onNavigatetoForehand = {},
+    onNavigatetoBackhand = {},
+    onNavigatetoSerwis = {})
 }
 

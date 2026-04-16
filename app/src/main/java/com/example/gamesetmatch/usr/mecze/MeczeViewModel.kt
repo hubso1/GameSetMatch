@@ -12,8 +12,6 @@ import kotlinx.coroutines.launch
 class MeczeViewModel @Inject constructor(
     private val repository: MeczRepository
 ) : ViewModel() {
-
-
     val allMatches = repository.allMatches
 
     // Główna funkcja z logiką walidacji

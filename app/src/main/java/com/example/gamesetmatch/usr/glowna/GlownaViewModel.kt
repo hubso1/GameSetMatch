@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamesetmatch.data.MeczEntity
 import com.example.gamesetmatch.data.MeczRepository
+import com.example.gamesetmatch.data.sprzet.SprzetEntity
+import com.example.gamesetmatch.data.sprzet.SprzetRepository
 import com.example.gamesetmatch.data.user.UserEntity
 import com.example.gamesetmatch.data.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,13 +19,22 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class GlownaViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val meczRepository: MeczRepository
+    private val meczRepository: MeczRepository,
+    private val sprzetRepository: SprzetRepository
 ) : ViewModel() {
 
     var name by mutableStateOf("")
         private set
     var match by mutableStateOf<MeczEntity?>(null)
 
+    var rakieta by mutableStateOf("")
+        private set
+
+    var buty by mutableStateOf("")
+        private set
+
+    var torba by mutableStateOf("")
+        private set
     init {
         viewModelScope.launch {
             userRepository.user.collect { UserEntity ->
@@ -36,9 +47,28 @@ class GlownaViewModel @Inject constructor(
                 match = MatchEntity
             }
         }
+        viewModelScope.launch {
+            sprzetRepository.sprzet.collect { SprzetEntity ->
+                rakieta = SprzetEntity?.rakieta ?: ""
+                buty = SprzetEntity?.buty ?: ""
+                torba = SprzetEntity?.torba ?: ""
+            }
+        }
     }
     fun nameChange(new_name: String){
         name = new_name
+    }
+
+    fun rakietaChange(new_rakieta: String){
+        rakieta = new_rakieta
+    }
+
+    fun butyChange(new_buty: String){
+        buty = new_buty
+    }
+
+    fun torbaChange(new_torba: String){
+        torba = new_torba
     }
 
     fun nameSave(){
@@ -47,6 +77,16 @@ class GlownaViewModel @Inject constructor(
                 UserEntity(
                     id = 0,
                     user = name
+                )
+            )
+        }
+        viewModelScope.launch {
+            sprzetRepository.saveSprzet(
+                SprzetEntity(
+                    id = 0,
+                    rakieta = rakieta,
+                    buty = buty,
+                    torba = torba
                 )
             )
         }
