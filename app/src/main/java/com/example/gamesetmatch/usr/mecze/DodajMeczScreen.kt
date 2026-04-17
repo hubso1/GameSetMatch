@@ -1,6 +1,7 @@
 package com.example.gamesetmatch.usr.mecze
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -11,18 +12,54 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DodajMeczScreen(
     onNavigateBack: () -> Unit,
-    viewModel: MeczeViewModel // Przekazujemy ViewModel bezpośrednio
+    viewModel: MeczeViewModel
 ) {
     val context = LocalContext.current
     var przeciwnik by remember { mutableStateOf("") }
-    var dataMeczu by remember { mutableStateOf("") }
     var wynik by remember { mutableStateOf("") }
     var czyWygrany by remember { mutableStateOf(false) }
+
+    // Logika kalendarza
+    var dataMeczu by remember { mutableStateOf("") } 
+    var showDatePicker by remember { mutableStateOf(false) }
+    val datePickerState = rememberDatePickerState()
+
+    fun formatMillisToDate(millis: Long): String {
+        val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return formatter.format(Date(millis))
+    }
+
+    if (showDatePicker) {
+        DatePickerDialog(
+            onDismissRequest = { showDatePicker = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    val selectedDate = datePickerState.selectedDateMillis
+                    if (selectedDate != null) {
+                        dataMeczu = formatMillisToDate(selectedDate)
+                    }
+                    showDatePicker = false
+                }) {
+                    Text("OK")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDatePicker = false }) {
+                    Text("Anuluj")
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -41,13 +78,37 @@ fun DodajMeczScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text("PRZECIWNIK")
-            OutlinedTextField(value = przeciwnik, onValueChange = { przeciwnik = it }, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(
+                value = przeciwnik,
+                onValueChange = { przeciwnik = it },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("Imię przeciwnika") }
+            )
 
             Text("DATA MECZU")
-            OutlinedTextField(value = dataMeczu, onValueChange = { dataMeczu = it }, modifier = Modifier.fillMaxWidth(), placeholder = { Text("np. 12.03.2026") })
+            Box(modifier = Modifier.fillMaxWidth()) {
+                OutlinedTextField(
+                    value = dataMeczu,
+                    onValueChange = { },
+                    modifier = Modifier.fillMaxWidth(),
+                    placeholder = { Text("Wybierz datę") },
+                    readOnly = true, // Użytkownik nie może pisać z klawiatury
+                    enabled = true
+                )
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable { showDatePicker = true }
+                )
+            }
 
             Text("WYNIK W SETACH")
-            OutlinedTextField(value = wynik, onValueChange = { wynik = it }, modifier = Modifier.fillMaxWidth(), placeholder = { Text("np. 6:4, 7:5") })
+            OutlinedTextField(
+                value = wynik,
+                onValueChange = { wynik = it },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("np. 6:4, 7:5") }
+            )
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
