@@ -37,8 +37,8 @@ fun AppNavHost(navController: NavHostController) {
         composable( "set_glowny_screen" ) {
             val vm: GlownaViewModel = hiltViewModel()
             SetGlownyScreen(
-                viewModel = vm,
-                onNavigateBack = { navController.popBackStack() }
+                navController = navController,
+                viewModel = vm
             )
         }
         composable(NavItem.Nauka.route) { NaukaScreen(
@@ -66,7 +66,10 @@ fun AppNavHost(navController: NavHostController) {
 
         composable(NavItem.Sprzet.route) {
             val vm : SprzetViewModel = hiltViewModel()
-            SprzetScreen(viewModel = vm)
+            SprzetScreen(
+                navController = navController,
+                viewModel = vm
+            )
         }
         composable(NavItem.Zasady.route) { ZasadyScreen() }
     }

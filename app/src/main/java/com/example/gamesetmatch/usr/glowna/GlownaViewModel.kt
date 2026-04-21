@@ -26,14 +26,18 @@ class GlownaViewModel @Inject constructor(
     var name by mutableStateOf("")
         private set
     var match by mutableStateOf<MeczEntity?>(null)
-
     var rakieta by mutableStateOf("")
         private set
-
     var buty by mutableStateOf("")
         private set
-
     var torba by mutableStateOf("")
+        private set
+
+    var rakietaUri by mutableStateOf<String?>(null)
+        private set
+    var butyUri by mutableStateOf<String?>(null)
+        private set
+    var torbaUri by mutableStateOf<String?>(null)
         private set
     init {
         viewModelScope.launch {
@@ -54,6 +58,14 @@ class GlownaViewModel @Inject constructor(
                 torba = SprzetEntity?.torba ?: ""
             }
         }
+        viewModelScope.launch {
+            sprzetRepository.sprzet.collect { entity ->
+                rakietaUri = entity?.rakietaUri
+                butyUri = entity?.butyUri
+                torbaUri = entity?.torbaUri
+            }
+        }
+
     }
     fun nameChange(new_name: String){
         name = new_name
@@ -70,6 +82,9 @@ class GlownaViewModel @Inject constructor(
     fun torbaChange(new_torba: String){
         torba = new_torba
     }
+    fun updateRakietaUri(uri: String?) { rakietaUri = uri }
+    fun updateButyUri(uri: String?) { butyUri = uri }
+    fun updateTorbaUri(uri: String?) { torbaUri = uri }
 
     fun nameSave(){
         viewModelScope.launch {
@@ -86,7 +101,10 @@ class GlownaViewModel @Inject constructor(
                     id = 0,
                     rakieta = rakieta,
                     buty = buty,
-                    torba = torba
+                    torba = torba,
+                    rakietaUri = rakietaUri,
+                    butyUri = butyUri,
+                    torbaUri = torbaUri
                 )
             )
         }

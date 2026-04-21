@@ -18,12 +18,18 @@ class SprzetViewModel @Inject constructor(
 ) : ViewModel() {
     var rakieta by mutableStateOf("")
         private set
-
     var buty by mutableStateOf("")
         private set
-
     var torba by mutableStateOf("")
         private set
+
+    var rakietaUri by mutableStateOf<String?>(null)
+        private set
+    var butyUri by mutableStateOf<String?>(null)
+        private set
+    var torbaUri by mutableStateOf<String?>(null)
+        private set
+
     init {
         viewModelScope.launch {
             sprzetRepository.sprzet.collect { SprzetEntity ->
@@ -31,6 +37,9 @@ class SprzetViewModel @Inject constructor(
                 buty = SprzetEntity?.buty ?: ""
                 torba = SprzetEntity?.torba ?: ""
 
+                rakietaUri = SprzetEntity?.rakietaUri
+                butyUri = SprzetEntity?.butyUri
+                torbaUri = SprzetEntity?.torbaUri
             }
         }
     }
