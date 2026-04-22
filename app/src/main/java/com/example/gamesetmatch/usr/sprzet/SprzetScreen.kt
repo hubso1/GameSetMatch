@@ -1,29 +1,113 @@
 package com.example.gamesetmatch.usr.sprzet
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import coil.compose.AsyncImage
 
-//Ui dla ekranu Sprzęt
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SprzetScreen(viewModel: SprzetViewModel = viewModel()) {
-    val rakieta = viewModel.rakieta
+fun SprzetScreen(
+    navController: NavController,
+    viewModel: SprzetViewModel
+) {
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { Text("MÓJ SPRZĘT", fontWeight = FontWeight.Bold) }
+            )
+        }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.spacedBy(32.dp)
+        ) {
 
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(rakieta)
+            // Karta 1: Rakieta
+            SprzetCard(
+                kategoria = "RAKIETA",
+                nazwaSprzetu = viewModel.rakieta ?: "Brak danych",
+                uri = viewModel.rakietaUri
+            )
+
+            // Karta 2: Buty
+            SprzetCard(
+                kategoria = "BUTY",
+                nazwaSprzetu = viewModel.buty ?: "Brak danych",
+                uri = viewModel.butyUri
+            )
+
+            // Karta 3: Torba
+            SprzetCard(
+                kategoria = "TORBA",
+                nazwaSprzetu = viewModel.torba ?: "Brak danych",
+                uri = viewModel.torbaUri
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+        }
     }
 }
 
-@Preview(showBackground = true )
 @Composable
-fun Compose_test(){
-    SprzetScreen()
+fun SprzetCard(kategoria: String, nazwaSprzetu: String, uri: String?) {
+    Column(horizontalAlignment = Alignment.Start) {
+
+        if (uri != null && uri.isNotBlank()) {
+            AsyncImage(
+                model = uri,
+                contentDescription = "Zdjęcie $kategoria",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(280.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Color(0xFF2C2C2C))
+            )
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(280.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Color(0xFF2C2C2C)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text("Brak zdjęcia galerii", color = Color.Gray)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Text(
+            text = kategoria,
+            fontSize = 14.sp,
+            color = Color.Gray,
+            fontWeight = FontWeight.SemiBold
+        )
+        Text(
+            text = nazwaSprzetu.uppercase(),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Black,
+            color = Color.Black
+        )
+    }
 }

@@ -13,4 +13,7 @@ interface MeczDao {
 
     @Delete
     suspend fun deleteMatch(mecz: MeczEntity)
+
+    @Query("SELECT * FROM mecze ORDER BY id DESC LIMIT 1")
+    fun getLastMatch(): Flow<MeczEntity?>
 }
