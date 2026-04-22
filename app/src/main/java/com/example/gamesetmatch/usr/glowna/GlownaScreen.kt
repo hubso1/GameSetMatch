@@ -19,8 +19,11 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.ArrowCircleRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +39,7 @@ import com.example.gamesetmatch.data.MeczEntity
 
 @Composable
 fun GlownyScreen(viewModel: GlownaViewModel,
-                 onNavigateToMecze: () -> Unit,
+                 onNavigateToNauka: () -> Unit,
                  onNavigateToUStawienia: () -> Unit
                  ) {
 
@@ -51,55 +54,72 @@ fun GlownyScreen(viewModel: GlownaViewModel,
             .padding(16.dp),
         verticalArrangement = Arrangement.Top,
         ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
 
-        ) {
-            Column(
-                verticalArrangement = Arrangement.Center
+        ListItem(
+            headlineContent = {
+                Text(
+                    "${viewModel.hi} \n${viewModel.name}",
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.Bold
                 )
-            {
-                Text(viewModel.hi, fontSize = 30.sp, fontWeight = FontWeight.Bold)
-                Text(viewModel.name, fontSize = 30.sp, fontWeight = FontWeight.Bold)
-                Text(kort, fontSize = 15.sp)
-            }
-
-            IconButton(
-                onClick = onNavigateToUStawienia ,
-
-                ) {
-                Icon(
-                    Icons.Default.Settings,
-                    contentDescription = null,
-                    Modifier.size(35.dp)
+            },
+            supportingContent = {
+                Text(
+                    kort,
+                    fontSize = 15.sp
                 )
+            },
+            trailingContent = {
+                IconButton(onClick = onNavigateToUStawienia) {
+                    Icon(
+                        Icons.Default.Settings,
+                        contentDescription = "",
+                        modifier = Modifier.size(30.dp)
+                    )
                 }
-
-
-        }
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = Color.Transparent,
+                headlineColor = MaterialTheme.colorScheme.scrim,
+                supportingColor = MaterialTheme.colorScheme.scrim,
+                trailingIconColor = MaterialTheme.colorScheme.scrim
+            )
+        )
         Spacer(modifier = Modifier.height(20.dp))
-        Row(
-            modifier = Modifier.background(color = Color(0xFFCBFF5B), shape = RoundedCornerShape(16.dp))
-                .padding(16.dp)
+        Card(
+            modifier = Modifier
                 .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
+            colors = CardDefaults.cardColors(
+                containerColor = Color.Transparent
+            ),
 
+            shape = RoundedCornerShape(16.dp)
         ) {
-            Text(trening, fontSize = 20.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(5.dp))
-            IconButton(
-                onClick = onNavigateToMecze,
-                Modifier.size(45.dp)
-                ) {
-                Icon(
-                    Icons.Outlined.ArrowCircleRight,
-                    contentDescription = null,
-                    Modifier.size(45.dp)
+            ListItem(
+                headlineContent = {
+                    Text(trening, fontSize = 20.sp, fontWeight = FontWeight.Bold ,modifier = Modifier.padding(5.dp))
+                },
+
+                trailingContent = {
+                    IconButton(
+                        onClick = onNavigateToNauka,
+                        Modifier.size(45.dp)
+                    ) {
+                        Icon(
+                            Icons.Outlined.ArrowCircleRight,
+                            contentDescription = null,
+                            Modifier.size(45.dp)
+                        )
+                    }
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    headlineColor = MaterialTheme.colorScheme.scrim,
+                    trailingIconColor = MaterialTheme.colorScheme.scrim
                 )
-            }
+            )
         }
+
         Spacer(modifier = Modifier.height(20.dp))
         Text(ostatni, fontSize = 20.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(5.dp))
         if (match != null)
@@ -160,7 +180,7 @@ fun lastmatchCard(lastmach: MeczEntity){
 @Composable
 fun Compose_test(){
     val vm: GlownaViewModel = hiltViewModel()
-    GlownyScreen(viewModel = vm,onNavigateToMecze = {},
+    GlownyScreen(viewModel = vm, onNavigateToNauka = {},
         onNavigateToUStawienia = {})
 
 }

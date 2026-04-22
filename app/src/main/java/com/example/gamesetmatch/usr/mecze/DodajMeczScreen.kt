@@ -15,7 +15,30 @@ import androidx.compose.ui.unit.dp
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppDodajMecze(onNavigateBack: () -> Unit){
+    CenterAlignedTopAppBar(
+        title = {
+            Text(
+                text = "DODAJ WYNIK",
+                style = MaterialTheme.typography.titleLarge
+            )
+        },
+        navigationIcon = {
 
+            IconButton(onClick = onNavigateBack) {
+
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back")
+
+            }
+        }
+
+
+    )
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DodajMeczScreen(
@@ -61,20 +84,9 @@ fun DodajMeczScreen(
         }
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("DODAJ WYNIK") },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Wstecz")
-                    }
-                }
-            )
-        }
-    ) { padding ->
+
         Column(
-            modifier = Modifier.padding(padding).padding(16.dp).fillMaxSize(),
+            modifier = Modifier.padding(16.dp).fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text("PRZECIWNIK")
@@ -140,4 +152,3 @@ fun DodajMeczScreen(
             }
         }
     }
-}

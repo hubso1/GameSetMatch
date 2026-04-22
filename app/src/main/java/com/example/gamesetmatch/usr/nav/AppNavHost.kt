@@ -30,11 +30,11 @@ fun AppNavHost(navController: NavHostController) {
             val vm: GlownaViewModel = hiltViewModel()
             GlownyScreen(
                 viewModel = vm,
-                onNavigateToMecze = { navController.navigate("mecze")},
-                onNavigateToUStawienia = { navController.navigate("set_glowny_screen")}
+                onNavigateToNauka = { navController.navigate(NavItem.Nauka.route)},
+                onNavigateToUStawienia = { navController.navigate(NavItem.Ustawienia.route)}
             )
         }
-        composable( "set_glowny_screen" ) {
+        composable(NavItem.Ustawienia.route ) {
             val vm: GlownaViewModel = hiltViewModel()
             SetGlownyScreen(
                 navController = navController,
@@ -67,7 +67,6 @@ fun AppNavHost(navController: NavHostController) {
         composable(NavItem.Sprzet.route) {
             val vm : SprzetViewModel = hiltViewModel()
             SprzetScreen(
-                navController = navController,
                 viewModel = vm
             )
         }

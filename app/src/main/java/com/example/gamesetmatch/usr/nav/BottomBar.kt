@@ -1,6 +1,7 @@
 package com.example.gamesetmatch.usr.nav
 
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -23,7 +24,7 @@ fun BottomNavBar(navController: NavHostController) {
         NavItem.Zasady
     )
 
-    NavigationBar ( containerColor = Color(0xFF1E1E1E)){
+    NavigationBar ( containerColor = MaterialTheme.colorScheme.inverseSurface){
         val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
         items.forEach { item ->
@@ -33,14 +34,13 @@ fun BottomNavBar(navController: NavHostController) {
                 icon = { Icon(item.icon, contentDescription = item.label) },
                 label = { Text(item.label) },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color(0xFFCBFF5B),
-                    unselectedIconColor = Color(0xFF757575),
-                    selectedTextColor = Color(0xFFCBFF5B),
-                    unselectedTextColor = Color(0xFF757575),
+                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                    unselectedIconColor = MaterialTheme.colorScheme.outline,
+                    selectedTextColor = MaterialTheme.colorScheme.primary,
+                    unselectedTextColor = MaterialTheme.colorScheme.outline,
                     indicatorColor = Color.Transparent
 
-                )
-            )
+            )    )
         }
     }
 }

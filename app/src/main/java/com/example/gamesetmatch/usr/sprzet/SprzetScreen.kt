@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,51 +23,64 @@ import coil.compose.AsyncImage
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SprzetScreen(
-    navController: NavController,
     viewModel: SprzetViewModel
 ) {
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text("MÓJ SPRZĘT", fontWeight = FontWeight.Bold) }
-            )
-        }
-    ) { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.spacedBy(32.dp)
-        ) {
+    Column(modifier = Modifier.fillMaxSize()
+        .padding(16.dp),
+        verticalArrangement = Arrangement.Top,) {
 
-            // Karta 1: Rakieta
-            SprzetCard(
-                kategoria = "RAKIETA",
-                nazwaSprzetu = viewModel.rakieta ?: "Brak danych",
-                uri = viewModel.rakietaUri
-            )
 
-            // Karta 2: Buty
-            SprzetCard(
-                kategoria = "BUTY",
-                nazwaSprzetu = viewModel.buty ?: "Brak danych",
-                uri = viewModel.butyUri
+    ListItem(
+        headlineContent = {
+            Text(
+                "Mój Sprzęt",
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold
             )
+        },
 
-            // Karta 3: Torba
-            SprzetCard(
-                kategoria = "TORBA",
-                nazwaSprzetu = viewModel.torba ?: "Brak danych",
-                uri = viewModel.torbaUri
-            )
+        colors = ListItemDefaults.colors(
+            containerColor = Color.Transparent,
+            headlineColor = MaterialTheme.colorScheme.scrim,
+        )
+    )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
 
-            Spacer(modifier = Modifier.height(32.dp))
-        }
+        // Karta 1: Rakieta
+        SprzetCard(
+            kategoria = "RAKIETA",
+            nazwaSprzetu = viewModel.rakieta ?: "Brak danych",
+            uri = viewModel.rakietaUri
+        )
+
+        // Karta 2: Buty
+        SprzetCard(
+            kategoria = "BUTY",
+            nazwaSprzetu = viewModel.buty ?: "Brak danych",
+            uri = viewModel.butyUri
+        )
+
+        // Karta 3: Torba
+        SprzetCard(
+            kategoria = "TORBA",
+            nazwaSprzetu = viewModel.torba ?: "Brak danych",
+            uri = viewModel.torbaUri
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
+
+    }
+
+
 
 @Composable
 fun SprzetCard(kategoria: String, nazwaSprzetu: String, uri: String?) {

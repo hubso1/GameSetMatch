@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.SportsTennis
 import androidx.compose.material.icons.filled.WarningAmber
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Settings
 
 sealed class NavItem(val route: String, val label: String, val icon: ImageVector) {
     object Glowna : NavItem("glowna", "Główna", Icons.Default.Home)
@@ -17,4 +18,6 @@ sealed class NavItem(val route: String, val label: String, val icon: ImageVector
     object Zasady : NavItem("zasady", "Zasady", Icons.Default.WarningAmber)
 
     object DodajMecz : NavItem("dodaj_mecz", "Dodaj", Icons.Default.Add)
+
+    object Ustawienia : NavItem("ustawienia", "ustawienia", Icons.Default.Settings)
 }

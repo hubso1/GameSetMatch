@@ -26,6 +26,31 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppUstawienia(onNavigateBack: () -> Unit){
+    CenterAlignedTopAppBar(
+        title = {
+            Text(
+                text = "USTAWIENIA PROFILU",
+                style = MaterialTheme.typography.titleLarge
+            )
+        },
+        navigationIcon = {
+
+            IconButton(onClick = onNavigateBack) {
+
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back")
+
+            }
+        }
+
+
+    )
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SetGlownyScreen(
@@ -55,22 +80,8 @@ fun SetGlownyScreen(
         }
     }
 
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("USTAWIENIA PROFILU") },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Wstecz")
-                    }
-                }
-            )
-        }
-    ) { padding ->
         Column(
             modifier = Modifier
-                .padding(padding)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()) // Ekran będzie przewijany
                 .padding(16.dp),
@@ -185,4 +196,6 @@ fun SetGlownyScreen(
             }
         }
     }
-}
+
+
+
