@@ -113,7 +113,7 @@ fun GlownyScreen(viewModel: GlownaViewModel,
                     }
                 },
                 colors = ListItemDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.secondary,
                     headlineColor = MaterialTheme.colorScheme.scrim,
                     trailingIconColor = MaterialTheme.colorScheme.scrim
                 )
@@ -133,13 +133,13 @@ fun GlownyScreen(viewModel: GlownaViewModel,
 fun lastmatchCard(lastmach: MeczEntity){
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1E1E))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary)
     ) {
         Box(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
             Column {
                 Text(
                     text = lastmach.data,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     style = MaterialTheme.typography.bodySmall
                 )
 
@@ -149,14 +149,14 @@ fun lastmatchCard(lastmach: MeczEntity){
                 ) {
                     Text(
                         text = "VS ${lastmach.przeciwnik.uppercase()}",
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
 
                     Spacer(modifier = Modifier.width(16.dp))
 
                     Text(
                         text = lastmach.wynik,
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.titleMedium
                     )
                 }
@@ -167,7 +167,7 @@ fun lastmatchCard(lastmach: MeczEntity){
                 Box(
                     modifier = Modifier
                         .size(10.dp)
-                        .background(Color(0xFFC5FF2D), CircleShape)
+                        .background(MaterialTheme.colorScheme.secondary, CircleShape)
                         .align(Alignment.CenterEnd)
                         .padding(end = 4.dp)
                 )

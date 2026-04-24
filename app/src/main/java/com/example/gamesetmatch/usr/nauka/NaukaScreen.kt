@@ -74,7 +74,7 @@ fun NaukaScreen(
 
         Card(modifier = modifier,
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.inverseSurface)
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
             ) {
             Spacer(modifier = Modifier.height(80.dp))
             ListItem(
@@ -101,14 +101,14 @@ fun NaukaScreen(
                 colors = ListItemDefaults.colors(
                     containerColor = Color.Transparent,
                     headlineColor = MaterialTheme.colorScheme.onPrimary,
-                    trailingIconColor = MaterialTheme.colorScheme.primary
+                    trailingIconColor = MaterialTheme.colorScheme.secondary
                 )
             )
         }
 
         Card(modifier = modifier,
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.inverseSurface)
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
         ) {
             Spacer(modifier = Modifier.height(80.dp))
             ListItem(
@@ -135,14 +135,14 @@ fun NaukaScreen(
                 colors = ListItemDefaults.colors(
                     containerColor = Color.Transparent,
                     headlineColor = MaterialTheme.colorScheme.onPrimary,
-                    trailingIconColor = MaterialTheme.colorScheme.primary
+                    trailingIconColor = MaterialTheme.colorScheme.secondary
                 )
             )
         }
 
         Card(modifier = modifier,
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.inverseSurface)
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
         ) {
             Spacer(modifier = Modifier.height(80.dp))
             ListItem(
@@ -169,7 +169,7 @@ fun NaukaScreen(
                 colors = ListItemDefaults.colors(
                     containerColor = Color.Transparent,
                     headlineColor = MaterialTheme.colorScheme.onPrimary,
-                    trailingIconColor = MaterialTheme.colorScheme.primary
+                    trailingIconColor = MaterialTheme.colorScheme.secondary
                 )
             )
         }

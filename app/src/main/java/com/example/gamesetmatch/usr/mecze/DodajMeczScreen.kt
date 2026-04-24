@@ -18,7 +18,7 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppDodajMecze(onNavigateBack: () -> Unit){
-    CenterAlignedTopAppBar(
+    CenterAlignedTopAppBar(colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
         title = {
             Text(
                 text = "DODAJ WYNIK",
@@ -131,7 +131,7 @@ fun DodajMeczScreen(
                 Switch(
                     checked = czyWygrany,
                     onCheckedChange = { czyWygrany = it },
-                    colors = SwitchDefaults.colors(checkedThumbColor = Color(0xFFC5FF2D))
+                    colors = SwitchDefaults.colors(checkedThumbColor = MaterialTheme.colorScheme.secondary)
                 )
             }
 
@@ -146,9 +146,9 @@ fun DodajMeczScreen(
                     )
                 },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFC5FF2D))
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
             ) {
-                Text("ZAPISZ WYNIK", color = Color.Black)
+                Text("ZAPISZ WYNIK", color = MaterialTheme.colorScheme.scrim)
             }
         }
     }

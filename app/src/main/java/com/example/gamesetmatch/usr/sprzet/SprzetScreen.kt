@@ -95,7 +95,7 @@ fun SprzetCard(kategoria: String, nazwaSprzetu: String, uri: String?) {
                     .fillMaxWidth()
                     .height(280.dp)
                     .clip(RoundedCornerShape(16.dp))
-                    .background(Color(0xFF2C2C2C))
+                    .background(MaterialTheme.colorScheme.primary)
             )
         } else {
             Box(
@@ -103,10 +103,10 @@ fun SprzetCard(kategoria: String, nazwaSprzetu: String, uri: String?) {
                     .fillMaxWidth()
                     .height(280.dp)
                     .clip(RoundedCornerShape(16.dp))
-                    .background(Color(0xFF2C2C2C)),
+                    .background(MaterialTheme.colorScheme.tertiary),
                 contentAlignment = Alignment.Center
             ) {
-                Text("Brak zdjęcia galerii", color = Color.Gray)
+                Text("Brak zdjęcia galerii", color = MaterialTheme.colorScheme.outline)
             }
         }
 
@@ -115,14 +115,14 @@ fun SprzetCard(kategoria: String, nazwaSprzetu: String, uri: String?) {
         Text(
             text = kategoria,
             fontSize = 14.sp,
-            color = Color.Gray,
+            color = MaterialTheme.colorScheme.scrim,
             fontWeight = FontWeight.SemiBold
         )
         Text(
             text = nazwaSprzetu.uppercase(),
             fontSize = 24.sp,
             fontWeight = FontWeight.Black,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.scrim
         )
     }
 }

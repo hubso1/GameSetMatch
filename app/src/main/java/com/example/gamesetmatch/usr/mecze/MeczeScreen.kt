@@ -88,13 +88,13 @@ fun MeczeListContent(
             items(matches) { match ->
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1E1E))
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary)
                 ) {
                     Box(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
                         Column {
                             Text(
                                 text = match.data,
-                                color = Color.Gray,
+                                color = MaterialTheme.colorScheme.onPrimary,
                                 style = MaterialTheme.typography.bodySmall
                             )
 
@@ -104,14 +104,14 @@ fun MeczeListContent(
                             ) {
                                 Text(
                                     text = "VS ${match.przeciwnik.uppercase()}",
-                                    color = Color.White
+                                    color = MaterialTheme.colorScheme.onPrimary
                                 )
 
                                 Spacer(modifier = Modifier.width(16.dp))
 
                                 Text(
                                     text = match.wynik,
-                                    color = Color.White,
+                                    color = MaterialTheme.colorScheme.onPrimary,
                                     style = MaterialTheme.typography.titleMedium
                                 )
                             }
@@ -122,7 +122,7 @@ fun MeczeListContent(
                             Box(
                                 modifier = Modifier
                                     .size(10.dp)
-                                    .background(Color(0xFFC5FF2D), CircleShape)
+                                    .background(MaterialTheme.colorScheme.secondary, CircleShape)
                                     .align(Alignment.CenterEnd)
                                     .padding(end = 4.dp)
                             )

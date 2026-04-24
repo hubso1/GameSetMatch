@@ -30,7 +30,7 @@ import coil.compose.AsyncImage
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppUstawienia(onNavigateBack: () -> Unit){
-    CenterAlignedTopAppBar(
+    CenterAlignedTopAppBar(colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
         title = {
             Text(
                 text = "USTAWIENIA PROFILU",
@@ -89,7 +89,7 @@ fun SetGlownyScreen(
         ) {
 
             Column {
-                Text("Dane gracza", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.Gray)
+                Text("Dane gracza", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.scrim)
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
                     value = viewModel.name ?: "",
@@ -101,7 +101,7 @@ fun SetGlownyScreen(
 
             HorizontalDivider()
 
-            Text("Twój sprzęt", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.Gray)
+            Text("Twój sprzęt", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.scrim)
 
             //RAKIETA
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
@@ -110,11 +110,12 @@ fun SetGlownyScreen(
                     onValueChange = { viewModel.rakietaChange(it) },
                     label = { Text("Model rakiety") },
                     modifier = Modifier.weight(1f)
+
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 IconButton(
                     onClick = { rakietaPicker.launch(arrayOf("image/*")) },
-                    modifier = Modifier.size(56.dp).background(Color.DarkGray, CircleShape)
+                    modifier = Modifier.size(56.dp).background(MaterialTheme.colorScheme.outline, CircleShape)
                 ) {
                     if (viewModel.rakietaUri != null) {
                         AsyncImage(
@@ -124,7 +125,7 @@ fun SetGlownyScreen(
                             modifier = Modifier.fillMaxSize().clip(CircleShape)
                         )
                     } else {
-                        Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = Color.White)
+                        Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = MaterialTheme.colorScheme.onPrimary)
                     }
                 }
             }
@@ -140,7 +141,7 @@ fun SetGlownyScreen(
                 Spacer(modifier = Modifier.width(16.dp))
                 IconButton(
                     onClick = { butyPicker.launch(arrayOf("image/*")) },
-                    modifier = Modifier.size(56.dp).background(Color.DarkGray, CircleShape)
+                    modifier = Modifier.size(56.dp).background(MaterialTheme.colorScheme.outline, CircleShape)
                 ) {
                     if (viewModel.butyUri != null) {
                         AsyncImage(
@@ -150,7 +151,7 @@ fun SetGlownyScreen(
                             modifier = Modifier.fillMaxSize().clip(CircleShape)
                         )
                     } else {
-                        Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = Color.White)
+                        Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = MaterialTheme.colorScheme.onPrimary)
                     }
                 }
             }
@@ -166,7 +167,7 @@ fun SetGlownyScreen(
                 Spacer(modifier = Modifier.width(16.dp))
                 IconButton(
                     onClick = { torbaPicker.launch(arrayOf("image/*")) },
-                    modifier = Modifier.size(56.dp).background(Color.DarkGray, CircleShape)
+                    modifier = Modifier.size(56.dp).background(MaterialTheme.colorScheme.outline, CircleShape)
                 ) {
                     if (viewModel.torbaUri != null) {
                         AsyncImage(
@@ -176,7 +177,7 @@ fun SetGlownyScreen(
                             modifier = Modifier.fillMaxSize().clip(CircleShape)
                         )
                     } else {
-                        Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = Color.White)
+                        Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = MaterialTheme.colorScheme.onPrimary)
                     }
                 }
             }
@@ -190,9 +191,9 @@ fun SetGlownyScreen(
                     navController.popBackStack()
                 },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFC5FF2D))
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
             ) {
-                Text("ZAPISZ PROFIL", color = Color.Black, fontWeight = FontWeight.Bold)
+                Text("ZAPISZ PROFIL", color = MaterialTheme.colorScheme.scrim, fontWeight = FontWeight.Bold)
             }
         }
     }
