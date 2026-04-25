@@ -15,9 +15,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.gamesetmatch.R
 import com.example.gamesetmatch.data.MeczEntity
 import com.example.gamesetmatch.usr.nav.NavItem
 
@@ -29,14 +31,15 @@ fun MeczeScreen(
 ) {
     // Tutaj pobieramy dane z bazy danych przez ViewModel
     val matches by viewModel.allMatches.collectAsState(initial = emptyList())
-    Column(modifier = Modifier.fillMaxSize()
+    Column(modifier = Modifier
+        .fillMaxSize()
         .padding(16.dp),
         verticalArrangement = Arrangement.Top,) {
 
         ListItem(
             headlineContent = {
                 Text(
-                    "Moje Mecze",
+                    stringResource(R.string.moje_mecze),
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -90,7 +93,9 @@ fun MeczeListContent(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary)
                 ) {
-                    Box(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+                    Box(modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth()) {
                         Column {
                             Text(
                                 text = match.data,

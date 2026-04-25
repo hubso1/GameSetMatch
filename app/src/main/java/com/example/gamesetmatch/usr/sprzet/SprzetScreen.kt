@@ -14,18 +14,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.gamesetmatch.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SprzetScreen(
     viewModel: SprzetViewModel
 ) {
-    Column(modifier = Modifier.fillMaxSize()
+    Column(modifier = Modifier
+        .fillMaxSize()
         .padding(16.dp),
         verticalArrangement = Arrangement.Top,) {
 
@@ -33,7 +36,7 @@ fun SprzetScreen(
     ListItem(
         headlineContent = {
             Text(
-                "Mój Sprzęt",
+                stringResource(R.string.m_j_sprz_t),
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -55,21 +58,21 @@ fun SprzetScreen(
 
         // Karta 1: Rakieta
         SprzetCard(
-            kategoria = "RAKIETA",
+            kategoria = stringResource(R.string.rakieta),
             nazwaSprzetu = viewModel.rakieta ?: "Brak danych",
             uri = viewModel.rakietaUri
         )
 
         // Karta 2: Buty
         SprzetCard(
-            kategoria = "BUTY",
+            kategoria = stringResource(R.string.Butyty),
             nazwaSprzetu = viewModel.buty ?: "Brak danych",
             uri = viewModel.butyUri
         )
 
         // Karta 3: Torba
         SprzetCard(
-            kategoria = "TORBA",
+            kategoria = stringResource(R.string.torbab),
             nazwaSprzetu = viewModel.torba ?: "Brak danych",
             uri = viewModel.torbaUri
         )
@@ -89,7 +92,7 @@ fun SprzetCard(kategoria: String, nazwaSprzetu: String, uri: String?) {
         if (uri != null && uri.isNotBlank()) {
             AsyncImage(
                 model = uri,
-                contentDescription = "Zdjęcie $kategoria",
+                contentDescription = "${stringResource(R.string.zdj_cie)} $kategoria",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -106,7 +109,7 @@ fun SprzetCard(kategoria: String, nazwaSprzetu: String, uri: String?) {
                     .background(MaterialTheme.colorScheme.tertiary),
                 contentAlignment = Alignment.Center
             ) {
-                Text("Brak zdjęcia galerii", color = MaterialTheme.colorScheme.outline)
+                Text(stringResource(R.string.brak_zdj_cia_galerii), color = MaterialTheme.colorScheme.outline)
             }
         }
 

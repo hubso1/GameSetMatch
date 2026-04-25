@@ -30,11 +30,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.gamesetmatch.R
 import com.example.gamesetmatch.data.MeczEntity
 
 @Composable
@@ -43,14 +45,12 @@ fun GlownyScreen(viewModel: GlownaViewModel,
                  onNavigateToUStawienia: () -> Unit
                  ) {
 
-    val kort = viewModel.kort
-    val trening = viewModel.trening
-    val ostatni = viewModel.ostatni
     val match = viewModel.match
 
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Top,
         ) {
@@ -58,14 +58,14 @@ fun GlownyScreen(viewModel: GlownaViewModel,
         ListItem(
             headlineContent = {
                 Text(
-                    "${viewModel.hi} \n${viewModel.name}",
+                    "${stringResource(R.string.cze)} \n${viewModel.name}",
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold
                 )
             },
             supportingContent = {
                 Text(
-                    kort,
+                    stringResource(R.string.gotowy_na_kort),
                     fontSize = 15.sp
                 )
             },
@@ -97,7 +97,7 @@ fun GlownyScreen(viewModel: GlownaViewModel,
         ) {
             ListItem(
                 headlineContent = {
-                    Text(trening, fontSize = 20.sp, fontWeight = FontWeight.Bold ,modifier = Modifier.padding(5.dp))
+                    Text(stringResource(R.string.rozpocznij_trening), fontSize = 20.sp, fontWeight = FontWeight.Bold ,modifier = Modifier.padding(5.dp))
                 },
 
                 trailingContent = {
@@ -121,7 +121,7 @@ fun GlownyScreen(viewModel: GlownaViewModel,
         }
 
         Spacer(modifier = Modifier.height(20.dp))
-        Text(ostatni, fontSize = 20.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(5.dp))
+        Text(stringResource(R.string.ostatni_mecz), fontSize = 20.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(5.dp))
         if (match != null)
             lastmatchCard(match)
 
@@ -135,7 +135,9 @@ fun lastmatchCard(lastmach: MeczEntity){
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary)
     ) {
-        Box(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+        Box(modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()) {
             Column {
                 Text(
                     text = lastmach.data,

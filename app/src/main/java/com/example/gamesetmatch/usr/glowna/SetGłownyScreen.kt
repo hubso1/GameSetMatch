@@ -20,11 +20,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.gamesetmatch.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,8 +35,9 @@ fun TopAppUstawienia(onNavigateBack: () -> Unit){
     CenterAlignedTopAppBar(colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
         title = {
             Text(
-                text = "USTAWIENIA PROFILU",
-                style = MaterialTheme.typography.titleLarge
+                text = stringResource(R.string.ustawienia_profilu),
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold
             )
         },
         navigationIcon = {
@@ -54,7 +57,7 @@ fun TopAppUstawienia(onNavigateBack: () -> Unit){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SetGlownyScreen(
-    navController: NavController,
+    onNavigateBack: () -> Unit,
     viewModel: GlownaViewModel
 ) {
     val context = LocalContext.current
@@ -89,40 +92,44 @@ fun SetGlownyScreen(
         ) {
 
             Column {
-                Text("Dane gracza", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.scrim)
+                Text(stringResource(R.string.dane_gracza), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.scrim)
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
                     value = viewModel.name ?: "",
                     onValueChange = { viewModel.nameChange(it) },
-                    label = { Text("Twoja nazwa / Imię") },
+                    label = { Text(stringResource(R.string.twoja_nazwa_imi)) },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
 
             HorizontalDivider()
 
-            Text("Twój sprzęt", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.scrim)
+            Text(stringResource(R.string.tw_j_sprz_t), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.scrim)
 
             //RAKIETA
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
                 OutlinedTextField(
                     value = viewModel.rakieta ?: "",
                     onValueChange = { viewModel.rakietaChange(it) },
-                    label = { Text("Model rakiety") },
+                    label = { Text(stringResource(R.string.model_rakiety)) },
                     modifier = Modifier.weight(1f)
 
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 IconButton(
                     onClick = { rakietaPicker.launch(arrayOf("image/*")) },
-                    modifier = Modifier.size(56.dp).background(MaterialTheme.colorScheme.outline, CircleShape)
+                    modifier = Modifier
+                        .size(56.dp)
+                        .background(MaterialTheme.colorScheme.outline, CircleShape)
                 ) {
                     if (viewModel.rakietaUri != null) {
                         AsyncImage(
                             model = viewModel.rakietaUri,
                             contentDescription = "Rakieta",
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize().clip(CircleShape)
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(CircleShape)
                         )
                     } else {
                         Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = MaterialTheme.colorScheme.onPrimary)
@@ -135,20 +142,24 @@ fun SetGlownyScreen(
                 OutlinedTextField(
                     value = viewModel.buty ?: "",
                     onValueChange = { viewModel.butyChange(it) },
-                    label = { Text("Buty") },
+                    label = { Text(stringResource(R.string.buty)) },
                     modifier = Modifier.weight(1f)
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 IconButton(
                     onClick = { butyPicker.launch(arrayOf("image/*")) },
-                    modifier = Modifier.size(56.dp).background(MaterialTheme.colorScheme.outline, CircleShape)
+                    modifier = Modifier
+                        .size(56.dp)
+                        .background(MaterialTheme.colorScheme.outline, CircleShape)
                 ) {
                     if (viewModel.butyUri != null) {
                         AsyncImage(
                             model = viewModel.butyUri,
                             contentDescription = "Buty",
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize().clip(CircleShape)
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(CircleShape)
                         )
                     } else {
                         Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = MaterialTheme.colorScheme.onPrimary)
@@ -161,20 +172,24 @@ fun SetGlownyScreen(
                 OutlinedTextField(
                     value = viewModel.torba ?: "",
                     onValueChange = { viewModel.torbaChange(it) },
-                    label = { Text("Torba") },
+                    label = { Text(stringResource(R.string.torba)) },
                     modifier = Modifier.weight(1f)
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 IconButton(
                     onClick = { torbaPicker.launch(arrayOf("image/*")) },
-                    modifier = Modifier.size(56.dp).background(MaterialTheme.colorScheme.outline, CircleShape)
+                    modifier = Modifier
+                        .size(56.dp)
+                        .background(MaterialTheme.colorScheme.outline, CircleShape)
                 ) {
                     if (viewModel.torbaUri != null) {
                         AsyncImage(
                             model = viewModel.torbaUri,
                             contentDescription = "Torba",
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize().clip(CircleShape)
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(CircleShape)
                         )
                     } else {
                         Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = MaterialTheme.colorScheme.onPrimary)
@@ -187,13 +202,15 @@ fun SetGlownyScreen(
             Button(
                 onClick = {
                     viewModel.nameSave()
-                    Toast.makeText(context, "Zapisano zmiany!", Toast.LENGTH_SHORT).show()
-                    navController.popBackStack()
+                    Toast.makeText(context,"Zapisano zmiany!", Toast.LENGTH_SHORT).show()
+                    onNavigateBack()
                 },
-                modifier = Modifier.fillMaxWidth().height(56.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
             ) {
-                Text("ZAPISZ PROFIL", color = MaterialTheme.colorScheme.scrim, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.zapisz_profil), color = MaterialTheme.colorScheme.scrim, fontWeight = FontWeight.Bold)
             }
         }
     }

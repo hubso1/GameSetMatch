@@ -17,6 +17,7 @@ import com.example.gamesetmatch.usr.nav.BottomNavBar
 import com.example.gamesetmatch.usr.nav.NavItem
 import com.example.gamesetmatch.usr.glowna.TopAppUstawienia
 import com.example.gamesetmatch.usr.mecze.TopAppDodajMecze
+import com.example.gamesetmatch.usr.nauka.TopAppSegment
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,13 +33,13 @@ class MainActivity : ComponentActivity() {
                 val current_route = navBackStackEntry?.destination?.route
 
                 Scaffold(
-                    topBar = {
-                        if (current_route == NavItem.Ustawienia.route) {
-                            TopAppUstawienia({ navController.popBackStack() })
-                        }
-                        if (current_route == NavItem.DodajMecz.route) {
-                            TopAppDodajMecze({ navController.popBackStack() })
-                        }
+                    topBar = { when (current_route){
+                        NavItem.Ustawienia.route -> TopAppUstawienia({ navController.popBackStack() })
+                        NavItem.DodajMecz.route -> TopAppDodajMecze({ navController.popBackStack() })
+                        NavItem.Forehand.route -> TopAppSegment({ navController.popBackStack() }, nauka = NavItem.Forehand.label)
+                        NavItem.Backhand.route -> TopAppSegment({ navController.popBackStack() }, nauka = NavItem.Backhand.label)
+                        NavItem.Serwis.route -> TopAppSegment({ navController.popBackStack() }, nauka = NavItem.Serwis.label)
+                    }
                     },
                     // Dolny panel nawigacyjn
                     bottomBar = {

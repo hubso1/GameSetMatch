@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.gamesetmatch.R
 import com.example.gamesetmatch.usr.nav.NavItem
 
 //Ui dla ekranu Nauka
@@ -43,15 +45,14 @@ fun NaukaScreen(
     onNavigatetoSerwis: () -> Unit
 
 ) {
-    val nauka = viewModel.nauka
-    val first = viewModel.first
-    val second = viewModel.second
-    val third = viewModel.third
-    val modifier = Modifier.fillMaxWidth()
+
+    val modifier = Modifier
+        .fillMaxWidth()
         .padding(16.dp)
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(16.dp)
 
 
@@ -60,7 +61,7 @@ fun NaukaScreen(
         ListItem(
             headlineContent = {
                 Text(
-                    text = nauka,
+                    text = stringResource(R.string.nauka_techniki),
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -80,7 +81,7 @@ fun NaukaScreen(
             ListItem(
                 headlineContent = {
                     Text(
-                        text = first,
+                        text = stringResource(R.string.forehand),
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -114,7 +115,7 @@ fun NaukaScreen(
             ListItem(
                 headlineContent = {
                     Text(
-                        text = second,
+                        text = stringResource(R.string.backhand),
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -148,7 +149,7 @@ fun NaukaScreen(
             ListItem(
                 headlineContent = {
                     Text(
-                        text = third,
+                        text = stringResource(R.string.serwis),
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold
                     )

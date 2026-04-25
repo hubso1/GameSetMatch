@@ -7,5 +7,5 @@ import javax.inject.Inject
 //viewModel dla ekranu zasad
 @HiltViewModel()
 class ZasadyViewModel @Inject constructor() : ViewModel() {
-    val zasada = "zasada"
+
 }

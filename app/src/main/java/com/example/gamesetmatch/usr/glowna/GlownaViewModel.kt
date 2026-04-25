@@ -110,11 +110,5 @@ class GlownaViewModel @Inject constructor(
         }
     }
 
-    val hi = "Cześć,"
-    val kort = "Gotowy na kort?"
-    val trening = "Rozpocznij\nTrening"
-
-    val ostatni = "Ostatni mecz"
-
 
 }

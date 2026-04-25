@@ -11,7 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.gamesetmatch.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -21,8 +25,9 @@ fun TopAppDodajMecze(onNavigateBack: () -> Unit){
     CenterAlignedTopAppBar(colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
         title = {
             Text(
-                text = "DODAJ WYNIK",
-                style = MaterialTheme.typography.titleLarge
+                text = stringResource(R.string.dodaj_wynik),
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold
             )
         },
         navigationIcon = {
@@ -71,12 +76,12 @@ fun DodajMeczScreen(
                     }
                     showDatePicker = false
                 }) {
-                    Text("OK")
+                    Text(stringResource(R.string.ok))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDatePicker = false }) {
-                    Text("Anuluj")
+                    Text(stringResource(R.string.anuluj))
                 }
             }
         ) {
@@ -86,24 +91,26 @@ fun DodajMeczScreen(
 
 
         Column(
-            modifier = Modifier.padding(16.dp).fillMaxSize(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("PRZECIWNIK")
+            Text(stringResource(R.string.przeciwnik))
             OutlinedTextField(
                 value = przeciwnik,
                 onValueChange = { przeciwnik = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Imię przeciwnika") }
+                placeholder = { Text(stringResource(R.string.imi_przeciwnika)) }
             )
 
-            Text("DATA MECZU")
+            Text(stringResource(R.string.data_meczu))
             Box(modifier = Modifier.fillMaxWidth()) {
                 OutlinedTextField(
                     value = dataMeczu,
                     onValueChange = { },
                     modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("Wybierz datę") },
+                    placeholder = { Text(stringResource(R.string.wybierz_dat)) },
                     readOnly = true, // Użytkownik nie może pisać z klawiatury
                     enabled = true
                 )
@@ -114,12 +121,12 @@ fun DodajMeczScreen(
                 )
             }
 
-            Text("WYNIK W SETACH")
+            Text(stringResource(R.string.wynik_w_setach))
             OutlinedTextField(
                 value = wynik,
                 onValueChange = { wynik = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("np. 6:4, 7:5") }
+                placeholder = { Text(stringResource(R.string.np_6_4_7_5)) }
             )
 
             Row(
@@ -127,7 +134,7 @@ fun DodajMeczScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("CZY WYGRAŁEŚ?")
+                Text(stringResource(R.string.czy_wygra_e))
                 Switch(
                     checked = czyWygrany,
                     onCheckedChange = { czyWygrany = it },
@@ -145,10 +152,12 @@ fun DodajMeczScreen(
                         onSuccess = { onNavigateBack() }
                     )
                 },
-                modifier = Modifier.fillMaxWidth().height(56.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
             ) {
-                Text("ZAPISZ WYNIK", color = MaterialTheme.colorScheme.scrim)
+                Text(stringResource(R.string.zapisz_wynik), color = MaterialTheme.colorScheme.scrim)
             }
         }
     }

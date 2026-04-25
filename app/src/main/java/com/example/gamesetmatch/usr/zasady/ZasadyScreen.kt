@@ -12,20 +12,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.gamesetmatch.R
 
 
 //Ui dla ekranu Zasady
 @Composable
 fun ZasadyScreen (viewModel: ZasadyViewModel = viewModel()) {
-    val zasada = viewModel.zasada
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(16.dp)
 
 
@@ -34,7 +36,7 @@ fun ZasadyScreen (viewModel: ZasadyViewModel = viewModel()) {
         ListItem(
             headlineContent = {
                 Text(
-                    text = zasada,
+                    text = stringResource(R.string.zasada),
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
                 )
