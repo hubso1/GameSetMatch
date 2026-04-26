@@ -38,4 +38,20 @@
     <string name="torbab">TORBA</string>
     <string name="zasada">zasada</string>
     <string name="m_j_sprz_t">Mój Sprzęt</string>
+
+    <string name="zasady_i_audio">ZASADY &amp; AUDIO</string>
+    <string name="zasady_gry">ZASADY GRY</string>
+
+    <string name="punktacja_tytul">PUNKTACJA</string>
+    <string name="punktacja_opis">Mecz dzieli się na sety, a sety na gemy. Punkty w gemie liczymy jako: 15, 30, 40, Gem. Przy stanie 40:40 (Równowaga) potrzeba przewagi, aby wygrać gema.</string>
+
+    <string name="serwis_tytul">SERWIS</string>
+    <string name="serwis_opis">Serwujący ma dwie próby. Błąd serwisowy (Fault) oznacza powtórkę. Podwójny błąd to utrata punktu.</string>
+
+    <string name="tie_break_tytul">TIE-BREAK</string>
+    <string name="tie_break_opis">Przy stanie 6:6 gra się do 7 punktów, z zachowaniem dwóch punktów przewagi (np. 7:5).</string>
+
+    <string name="glos_sedziego">GŁOS SĘDZIEGO</string>
+    <string name="symulacja_meczu">SYMULACJA MECZU</string>
+    <string name="sciezka_dzwiekowa">ŚCIEŻKA DŹWIĘKOWA</string>
 </resources>
