@@ -28,8 +28,8 @@
     <string name="forehand">Forehand</string>
     <string name="backhand">Backhand</string>
     <string name="serwis">Serwis</string>
-    <string name="podstawa_uderze">Podstawa uderzeń z głębi kortu. Kluczem jest płynny skręt tułowia \ni odpowiednie odprowadzenie rakiety.</string>
-    <string name="jednor_czny_lub_obur_czny">Jednoręczny lub oburęczny. \nSkup się na domknięciu uderzenia przed osią ciała.</string>
+    <string name="podstawa_uderze">Podstawa uderzeń z głębi kortu. Kluczem jest płynny skręt tułowia i odpowiednie odprowadzenie rakiety.</string>
+    <string name="jednor_czny_lub_obur_czny">Jednoręczny lub oburęczny. Skup się na domknięciu uderzenia przed osią ciała.</string>
     <string name="najwa_niejsze_uderzenie">Najważniejsze uderzenie w tenisie. Płynny wyrzut piłki i rytm to podstawa powtarzalności.</string>
     <string name="zdj_cie">Zdjęcie</string>
     <string name="brak_zdj_cia_galerii">Brak zdjęcia galerii</string>
