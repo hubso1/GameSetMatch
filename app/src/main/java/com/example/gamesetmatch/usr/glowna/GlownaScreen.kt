@@ -38,6 +38,19 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.gamesetmatch.R
 import com.example.gamesetmatch.data.MeczEntity
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.offset
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.draw.rotate
+import androidx.compose.runtime.getValue
 
 @Composable
 fun GlownyScreen(viewModel: GlownaViewModel,
@@ -47,6 +60,27 @@ fun GlownyScreen(viewModel: GlownaViewModel,
 
     val match = viewModel.match
 
+    // ANIMACJA 1 - strzałka
+    val infiniteTransition = rememberInfiniteTransition()
+    val offsetX = infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 10f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "PulsingArrowAnimation"
+    )
+
+    // ANIMACJA 2 - zębatka
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+
+    val rotationAngle by animateFloatAsState(
+        targetValue = if (isPressed) 180f else 0f,
+        animationSpec = tween(durationMillis = 500),
+        label = "GearRotation"
+    )
 
     Column(
         modifier = Modifier
@@ -70,11 +104,11 @@ fun GlownyScreen(viewModel: GlownaViewModel,
                 )
             },
             trailingContent = {
-                IconButton(onClick = onNavigateToUStawienia) {
+                IconButton(onClick = onNavigateToUStawienia, interactionSource = interactionSource) {
                     Icon(
                         Icons.Default.Settings,
                         contentDescription = "",
-                        modifier = Modifier.size(30.dp)
+                        modifier = Modifier.size(30.dp).rotate(rotationAngle)
                     )
                 }
             },
@@ -108,7 +142,7 @@ fun GlownyScreen(viewModel: GlownaViewModel,
                         Icon(
                             Icons.Outlined.ArrowCircleRight,
                             contentDescription = null,
-                            Modifier.size(45.dp)
+                            Modifier.size(45.dp).offset(x = offsetX.value.dp)
                         )
                     }
                 },
