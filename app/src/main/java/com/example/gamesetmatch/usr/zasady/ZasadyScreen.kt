@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gamesetmatch.R
+import android.media.MediaPlayer
+import androidx.compose.ui.platform.LocalContext
 
 private data class ZasadaItem(
     @StringRes val tytulResId: Int,
@@ -36,6 +38,8 @@ private val zasadyGry = listOf(
 // Ui dla ekranu Zasady
 @Composable
 fun ZasadyScreen(viewModel: ZasadyViewModel = viewModel()) {
+
+    val context = LocalContext.current
 
     LazyColumn(
         modifier = Modifier
@@ -107,7 +111,10 @@ fun ZasadyScreen(viewModel: ZasadyViewModel = viewModel()) {
                         .size(120.dp)
                         .clip(CircleShape)
                         .background(MaterialTheme.colorScheme.tertiary)
-                        .clickable { /* TODO: Odtwarzanie */ },
+                        .clickable {
+                            val mediaPlayer = MediaPlayer.create(context, R.raw.audio)
+                            mediaPlayer.setOnCompletionListener { it.release() }
+                            mediaPlayer.start() },
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
