@@ -28,9 +28,9 @@
     <string name="forehand">Forehand</string>
     <string name="backhand">Backhand</string>
     <string name="serwis">Serwis</string>
-    <string name="podstawa_uderze">Podstawa uderzeń z głębi kortu. Kluczem jest płynny skręt tułowia i odpowiednie odprowadzenie rakiety.</string>
-    <string name="jednor_czny_lub_obur_czny">Jednoręczny lub oburęczny. Skup się na domknięciu uderzenia przed osią ciała.</string>
-    <string name="najwa_niejsze_uderzenie">Najważniejsze uderzenie w tenisie. Płynny wyrzut piłki i rytm to podstawa powtarzalności.</string>
+    <string name="podstawa_uderze">Backhand to podstawowe uderzenie z głębi kortu, wykonywane jednoręcznie lub oburęcznie. Jego skuteczność opiera się na płynnym skręcie tułowia, który inicjuje cały ruch, oraz na odpowiednim odprowadzeniu rakiety po kontakcie z piłką. Właśnie ta sekwencja — rotacja ciała i kontrolowane wykończenie — zapewnia stabilność, kierunek oraz powtarzalność uderzenia, nawet przy szybkim tempie wymiany.</string>
+    <string name="jednor_czny_lub_obur_czny">Forhend to podstawowe uderzenie w tenisie, wykonywane jednoręcznie lub oburęcznie, zależnie od stylu gracza. Kluczowym elementem techniki jest domknięcie uderzenia przed osią ciała, dzięki czemu ruch pozostaje czysty, kontrolowany i stabilny. Właśnie to właściwe wykończenie pozwala generować pewną, powtarzalną piłkę i utrzymać pełną kontrolę nad kierunkiem oraz tempem zagrania.</string>
+    <string name="najwa_niejsze_uderzenie">Serwis to najważniejsze uderzenie w tenisie ziemnym, ponieważ jako jedyne pozwala zawodnikowi w pełni kontrolować początek każdej wymiany. To od jakości serwisu zależy, czy gracz od razu zyska przewagę, zmusi rywala do defensywy, a czasem nawet zdobędzie punkt bez konieczności dalszej gry. Kluczową rolę odgrywa tutaj płynny, stabilny wyrzut piłki, który stanowi fundament powtarzalności. Jeśli toss jest zawsze taki sam, całe uderzenie staje się bardziej przewidywalne i technicznie czystsze.</string>
     <string name="zdj_cie">Zdjęcie</string>
     <string name="brak_zdj_cia_galerii">Brak zdjęcia galerii</string>
     <string name="rakieta">RAKIETA</string>
@@ -54,4 +54,6 @@
     <string name="glos_sedziego">GŁOS SĘDZIEGO</string>
     <string name="symulacja_meczu">SYMULACJA MECZU</string>
     <string name="sciezka_dzwiekowa">ŚCIEŻKA DŹWIĘKOWA</string>
+    <string name="obejrzyj_wideo">Obejrzyj wideo</string>
+    <string name="galeria_ruchu">Galeria Ruchu</string>
 </resources>

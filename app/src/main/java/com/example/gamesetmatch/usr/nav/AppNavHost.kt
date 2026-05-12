@@ -53,7 +53,7 @@ fun AppNavHost(navController: NavHostController) {
         )
         }
         composable(NavItem.Forehand.route) {
-            val vm: SegmentViewmodel = hiltViewModel()
+            val vm: SegmentViewmodel = viewModel()
             vm.updateSegment(SegmetType.Forehand)
             SegmentScreen(
                 onNavigateBack = { navController.popBackStack() },
@@ -64,7 +64,7 @@ fun AppNavHost(navController: NavHostController) {
 
         }
         composable(NavItem.Backhand.route) {
-            val vm: SegmentViewmodel = hiltViewModel()
+            val vm: SegmentViewmodel = viewModel()
             vm.updateSegment(SegmetType.Backhand)
             SegmentScreen(
                 onNavigateBack = { navController.popBackStack() },
@@ -75,7 +75,7 @@ fun AppNavHost(navController: NavHostController) {
 
         }
         composable(NavItem.Serwis.route) {
-            val vm: SegmentViewmodel = hiltViewModel()
+            val vm: SegmentViewmodel = viewModel()
             vm.updateSegment(SegmetType.Serwis)
             SegmentScreen(
                 onNavigateBack = { navController.popBackStack() },

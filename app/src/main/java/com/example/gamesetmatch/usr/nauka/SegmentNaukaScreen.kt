@@ -142,11 +142,26 @@ fun SegmentScreen(
                     .fillMaxWidth()
                     .height(200.dp))
             }
+            Text(text = stringResource(R.string.obejrzyj_wideo),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Black,
+                modifier = Modifier
+                    .padding(top = 10.dp, bottom = 20.dp))
+
             when (segment){
-                SegmetType.Forehand -> Text(stringResource(R.string.podstawa_uderze))
-                SegmetType.Backhand -> Text(stringResource(R.string.jednor_czny_lub_obur_czny))
-                SegmetType.Serwis -> Text(stringResource(R.string.najwa_niejsze_uderzenie))
+                SegmetType.Forehand -> Text(stringResource(R.string.podstawa_uderze),fontSize = 15.sp,
+                    fontWeight = FontWeight.Normal,)
+                SegmetType.Backhand -> Text(stringResource(R.string.jednor_czny_lub_obur_czny),fontSize = 15.sp,
+                    fontWeight = FontWeight.Normal,)
+                SegmetType.Serwis -> Text(stringResource(R.string.najwa_niejsze_uderzenie),fontSize = 15.sp,
+                    fontWeight = FontWeight.Normal,)
             }
+
+            Text(text = stringResource(R.string.galeria_ruchu),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Black,
+                modifier = Modifier
+                    .padding(top = 20.dp, bottom = 10.dp))
 
 
 
