@@ -19,36 +19,13 @@ import com.example.gamesetmatch.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopAppDodajMecze(onNavigateBack: () -> Unit){
-    CenterAlignedTopAppBar(colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
-        title = {
-            Text(
-                text = stringResource(R.string.dodaj_wynik),
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold
-            )
-        },
-        navigationIcon = {
 
-            IconButton(onClick = onNavigateBack) {
-
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back")
-
-            }
-        }
-
-
-    )
-}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DodajMeczScreen(
     onNavigateBack: () -> Unit,
-    viewModel: MeczeViewModel
+    viewModel: MeczeViewModel,
+    name: String
 ) {
     val context = LocalContext.current
     var przeciwnik by remember { mutableStateOf("") }
@@ -88,6 +65,29 @@ fun DodajMeczScreen(
             DatePicker(state = datePickerState)
         }
     }
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        ListItem(
+            colors = ListItemDefaults.colors(Color.Transparent),
+            headlineContent = {
+                Text(
+                    text = name,
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            leadingContent = {
+                IconButton(
+                    onClick =
+                        onNavigateBack
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
+            }
+        )
 
 
         Column(
@@ -148,7 +148,9 @@ fun DodajMeczScreen(
                 onClick = {
                     viewModel.addMatchWithValidation(
                         przeciwnik, wynik, dataMeczu, czyWygrany,
-                        onError = { error -> Toast.makeText(context, error, Toast.LENGTH_SHORT).show() },
+                        onError = { error ->
+                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                        },
                         onSuccess = { onNavigateBack() }
                     )
                 },
@@ -160,4 +162,5 @@ fun DodajMeczScreen(
                 Text(stringResource(R.string.zapisz_wynik), color = MaterialTheme.colorScheme.scrim)
             }
         }
+    }
     }

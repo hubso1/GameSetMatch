@@ -29,36 +29,13 @@ import coil.compose.AsyncImage
 import com.example.gamesetmatch.R
 
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopAppUstawienia(onNavigateBack: () -> Unit){
-    CenterAlignedTopAppBar(colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
-        title = {
-            Text(
-                text = stringResource(R.string.ustawienia_profilu),
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold
-            )
-        },
-        navigationIcon = {
 
-            IconButton(onClick = onNavigateBack) {
-
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back")
-
-            }
-        }
-
-
-    )
-}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SetGlownyScreen(
     onNavigateBack: () -> Unit,
-    viewModel: GlownaViewModel
+    viewModel: GlownaViewModel,
+    name: String
 ) {
     val context = LocalContext.current
 
@@ -82,6 +59,25 @@ fun SetGlownyScreen(
             viewModel.updateTorbaUri(it.toString())
         }
     }
+    Column(modifier = Modifier.fillMaxSize()) {
+        ListItem(
+            colors = ListItemDefaults.colors(Color.Transparent),
+            headlineContent = {
+                Text(
+                    text = name,
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            leadingContent = {
+                IconButton(onClick = onNavigateBack) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
+            }
+        )
 
         Column(
             modifier = Modifier
@@ -92,7 +88,12 @@ fun SetGlownyScreen(
         ) {
 
             Column {
-                Text(stringResource(R.string.dane_gracza), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.scrim)
+                Text(
+                    stringResource(R.string.dane_gracza),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.scrim
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
                     value = viewModel.name ?: "",
@@ -104,10 +105,18 @@ fun SetGlownyScreen(
 
             HorizontalDivider()
 
-            Text(stringResource(R.string.tw_j_sprz_t), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.scrim)
+            Text(
+                stringResource(R.string.tw_j_sprz_t),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.scrim
+            )
 
             //RAKIETA
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 OutlinedTextField(
                     value = viewModel.rakieta ?: "",
                     onValueChange = { viewModel.rakietaChange(it) },
@@ -132,13 +141,20 @@ fun SetGlownyScreen(
                                 .clip(CircleShape)
                         )
                     } else {
-                        Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = MaterialTheme.colorScheme.onPrimary)
+                        Icon(
+                            Icons.Default.ImageSearch,
+                            contentDescription = "Wybierz",
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
                     }
                 }
             }
 
             // BUTY
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 OutlinedTextField(
                     value = viewModel.buty ?: "",
                     onValueChange = { viewModel.butyChange(it) },
@@ -162,13 +178,20 @@ fun SetGlownyScreen(
                                 .clip(CircleShape)
                         )
                     } else {
-                        Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = MaterialTheme.colorScheme.onPrimary)
+                        Icon(
+                            Icons.Default.ImageSearch,
+                            contentDescription = "Wybierz",
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
                     }
                 }
             }
 
             // TORBA
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 OutlinedTextField(
                     value = viewModel.torba ?: "",
                     onValueChange = { viewModel.torbaChange(it) },
@@ -192,7 +215,11 @@ fun SetGlownyScreen(
                                 .clip(CircleShape)
                         )
                     } else {
-                        Icon(Icons.Default.ImageSearch, contentDescription = "Wybierz", tint = MaterialTheme.colorScheme.onPrimary)
+                        Icon(
+                            Icons.Default.ImageSearch,
+                            contentDescription = "Wybierz",
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
                     }
                 }
             }
@@ -202,7 +229,7 @@ fun SetGlownyScreen(
             Button(
                 onClick = {
                     viewModel.nameSave()
-                    Toast.makeText(context,"Zapisano zmiany!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Zapisano zmiany!", Toast.LENGTH_SHORT).show()
                     onNavigateBack()
                 },
                 modifier = Modifier
@@ -210,9 +237,14 @@ fun SetGlownyScreen(
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
             ) {
-                Text(stringResource(R.string.zapisz_profil), color = MaterialTheme.colorScheme.scrim, fontWeight = FontWeight.Bold)
+                Text(
+                    stringResource(R.string.zapisz_profil),
+                    color = MaterialTheme.colorScheme.scrim,
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
+    }
     }
 
 

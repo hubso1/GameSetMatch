@@ -17,9 +17,9 @@ sealed class NavItem(val route: String, val label: String, val icon: ImageVector
     object Sprzet : NavItem("sprzet", "Sprzęt", Icons.Default.SportsTennis)
     object Zasady : NavItem("zasady", "Zasady", Icons.Default.WarningAmber)
 
-    object DodajMecz : NavItem("dodaj_mecz", "Dodaj", Icons.Default.Add)
+    object DodajMecz : NavItem("dodaj_mecz", "Dodaj mecz", Icons.Default.Add)
 
-    object Ustawienia : NavItem("ustawienia", "ustawienia", Icons.Default.Settings)
+    object Ustawienia : NavItem("ustawienia", "Ustawienia", Icons.Default.Settings)
     object Forehand : NavItem("forehand", "Forehand", Icons.Default.School)
     object Backhand : NavItem("backhand", "Backhand", Icons.Default.School)
     object Serwis : NavItem("serwis", "Serwis", Icons.Default.School)

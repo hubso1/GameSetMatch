@@ -42,7 +42,8 @@ fun AppNavHost(navController: NavHostController) {
             val vm: GlownaViewModel = hiltViewModel()
             SetGlownyScreen(
                 onNavigateBack = { navController.popBackStack() },
-                viewModel = vm
+                viewModel = vm,
+                name = NavItem.Ustawienia.label
             )
         }
         composable(NavItem.Nauka.route) { NaukaScreen(
@@ -52,31 +53,35 @@ fun AppNavHost(navController: NavHostController) {
         )
         }
         composable(NavItem.Forehand.route) {
-            val vm: SegmentViewmodel = viewModel()
+            val vm: SegmentViewmodel = hiltViewModel()
             vm.updateSegment(SegmetType.Forehand)
             SegmentScreen(
                 onNavigateBack = { navController.popBackStack() },
-                viewModel = vm
+                viewModel = vm,
+                name = NavItem.Forehand.label
 
             )
 
         }
         composable(NavItem.Backhand.route) {
-            val vm: SegmentViewmodel = viewModel()
+            val vm: SegmentViewmodel = hiltViewModel()
             vm.updateSegment(SegmetType.Backhand)
             SegmentScreen(
                 onNavigateBack = { navController.popBackStack() },
-                viewModel = vm
+                viewModel = vm,
+                name = NavItem.Backhand.label
 
             )
 
         }
         composable(NavItem.Serwis.route) {
-            val vm: SegmentViewmodel = viewModel()
+            val vm: SegmentViewmodel = hiltViewModel()
             vm.updateSegment(SegmetType.Serwis)
             SegmentScreen(
                 onNavigateBack = { navController.popBackStack() },
-                viewModel = vm
+                viewModel = vm,
+                name = NavItem.Serwis.label
+
 
             )
 
@@ -95,6 +100,7 @@ fun AppNavHost(navController: NavHostController) {
             DodajMeczScreen(
                 viewModel = vm,
                 onNavigateBack = { navController.popBackStack() },
+                name = NavItem.DodajMecz.label
             )
         }
 

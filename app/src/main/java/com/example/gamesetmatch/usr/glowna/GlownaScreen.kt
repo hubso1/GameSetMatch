@@ -63,8 +63,8 @@ fun GlownyScreen(viewModel: GlownaViewModel,
     // ANIMACJA 1 - strzałka
     val infiniteTransition = rememberInfiniteTransition()
     val offsetX = infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 10f,
+        initialValue = 3f,
+        targetValue = -3f,
         animationSpec = infiniteRepeatable(
             animation = tween(1000),
             repeatMode = RepeatMode.Reverse

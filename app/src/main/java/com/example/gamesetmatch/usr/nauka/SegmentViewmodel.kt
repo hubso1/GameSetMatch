@@ -13,6 +13,7 @@ class SegmentViewmodel: ViewModel() {
     fun updateSegment(segset: SegmetType){
         segment = segset
     }
+    var vid by mutableStateOf(true)
 
     val listforehand = listOf(
         R.drawable.f1,
