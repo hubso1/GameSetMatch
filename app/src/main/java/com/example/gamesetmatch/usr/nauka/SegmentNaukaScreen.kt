@@ -70,8 +70,8 @@ fun SegmentScreen(
 
     val url = when(segment){
         SegmetType.Serwis -> R.raw.serwis
-        SegmetType.Backhand -> R.raw.backhand
-        SegmetType.Forehand -> R.raw.forehand
+        SegmetType.Backhand -> R.raw.forehand
+        SegmetType.Forehand -> R.raw.backhand
     }
 
     val VideoUrl = remember(url) {
@@ -149,9 +149,9 @@ fun SegmentScreen(
                     .padding(top = 10.dp, bottom = 20.dp))
 
             when (segment){
-                SegmetType.Forehand -> Text(stringResource(R.string.podstawa_uderze),fontSize = 15.sp,
+                SegmetType.Forehand -> Text(stringResource(R.string.jednor_czny_lub_obur_czny),fontSize = 15.sp,
                     fontWeight = FontWeight.Normal,)
-                SegmetType.Backhand -> Text(stringResource(R.string.jednor_czny_lub_obur_czny),fontSize = 15.sp,
+                SegmetType.Backhand -> Text(stringResource(R.string.podstawa_uderze),fontSize = 15.sp,
                     fontWeight = FontWeight.Normal,)
                 SegmetType.Serwis -> Text(stringResource(R.string.najwa_niejsze_uderzenie),fontSize = 15.sp,
                     fontWeight = FontWeight.Normal,)
