@@ -13,13 +13,19 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowCircleRight
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.gamesetmatch.R
 import com.example.gamesetmatch.usr.nav.NavItem
 
 //Ui dla ekranu Nauka
@@ -38,95 +45,137 @@ fun NaukaScreen(
     onNavigatetoSerwis: () -> Unit
 
 ) {
-    val nauka = viewModel.nauka
-    val first = viewModel.first
-    val second = viewModel.second
-    val third = viewModel.third
-    val modifier = Modifier.fillMaxWidth()
-        .background(color = Color(0xFF1E1E1E), shape = RoundedCornerShape(16.dp))
+
+    val modifier = Modifier
+        .fillMaxWidth()
         .padding(16.dp)
-        .padding(top = 70.dp)
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(16.dp)
 
 
     ){
-        Text(nauka, fontSize = 30.sp, fontWeight = FontWeight.Bold )
 
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Row(
-            modifier = modifier,
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-
-        ) {
-            Text(first,fontSize = 30.sp,color = Color(0xFFFFFFFF))
-            IconButton(
-                onClick = onNavigatetoForehand,
-                modifier = Modifier.size(50.dp)
-
-            ) {
-                Icon(
-                    Icons.Outlined.ArrowCircleRight,
-                    contentDescription = null,
-                    modifier = Modifier.size(50.dp),
-                    tint = Color(0xFFCBFF5B)
-
-
+        ListItem(
+            headlineContent = {
+                Text(
+                    text = stringResource(R.string.nauka_techniki),
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold
                 )
-            }
+            },
 
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-        Row(
-            modifier = modifier,
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            colors = ListItemDefaults.colors(
+                containerColor = Color.Transparent,
+                headlineColor = MaterialTheme.colorScheme.scrim,
+            )
+        )
 
-        ) {
-            Text(second,fontSize = 30.sp,color = Color(0xFFFFFFFF))
-            IconButton(
-                onClick = onNavigatetoBackhand,
-                modifier = Modifier.size(50.dp)
+        Card(modifier = modifier,
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
             ) {
-                Icon(
-                    Icons.Outlined.ArrowCircleRight,
-                    contentDescription = null,
-                    modifier = Modifier.size(50.dp),
-                    tint = Color(0xFFCBFF5B)
+            Spacer(modifier = Modifier.height(80.dp))
+            ListItem(
+                headlineContent = {
+                    Text(
+                        text = stringResource(R.string.forehand),
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                trailingContent = {
+                    IconButton(
+                        onClick = onNavigatetoForehand,
+                        Modifier.size(45.dp)
+                    ) {
+                        Icon(
+                            Icons.Outlined.ArrowCircleRight,
+                            contentDescription = null,
+                            Modifier.size(45.dp)
+                        )
+                    }
+                },
 
-
+                colors = ListItemDefaults.colors(
+                    containerColor = Color.Transparent,
+                    headlineColor = MaterialTheme.colorScheme.onPrimary,
+                    trailingIconColor = MaterialTheme.colorScheme.secondary
                 )
-            }
-
+            )
         }
-        Spacer(modifier = Modifier.height(20.dp))
-        Row(
-            modifier = modifier,
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
 
+        Card(modifier = modifier,
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
         ) {
-            Text(third,fontSize = 30.sp,color = Color(0xFFFFFFFF))
-            IconButton(
-                onClick = onNavigatetoSerwis,
-                modifier = Modifier.size(50.dp)
-            ) {
-                Icon(
-                    Icons.Outlined.ArrowCircleRight,
-                    contentDescription = null,
-                    modifier = Modifier.size(50.dp),
-                    tint = Color(0xFFCBFF5B)
+            Spacer(modifier = Modifier.height(80.dp))
+            ListItem(
+                headlineContent = {
+                    Text(
+                        text = stringResource(R.string.backhand),
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                trailingContent = {
+                    IconButton(
+                        onClick = onNavigatetoBackhand,
+                        Modifier.size(45.dp)
+                    ) {
+                        Icon(
+                            Icons.Outlined.ArrowCircleRight,
+                            contentDescription = null,
+                            Modifier.size(45.dp)
+                        )
+                    }
+                },
 
-
+                colors = ListItemDefaults.colors(
+                    containerColor = Color.Transparent,
+                    headlineColor = MaterialTheme.colorScheme.onPrimary,
+                    trailingIconColor = MaterialTheme.colorScheme.secondary
                 )
-            }
-
+            )
         }
-        Spacer(modifier = Modifier.height(20.dp))
+
+        Card(modifier = modifier,
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+        ) {
+            Spacer(modifier = Modifier.height(80.dp))
+            ListItem(
+                headlineContent = {
+                    Text(
+                        text = stringResource(R.string.serwis),
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                trailingContent = {
+                    IconButton(
+                        onClick = onNavigatetoSerwis,
+                        Modifier.size(45.dp)
+                    ) {
+                        Icon(
+                            Icons.Outlined.ArrowCircleRight,
+                            contentDescription = null,
+                            Modifier.size(45.dp)
+                        )
+                    }
+                },
+
+                colors = ListItemDefaults.colors(
+                    containerColor = Color.Transparent,
+                    headlineColor = MaterialTheme.colorScheme.onPrimary,
+                    trailingIconColor = MaterialTheme.colorScheme.secondary
+                )
+            )
+        }
+
+
     }
 }
 

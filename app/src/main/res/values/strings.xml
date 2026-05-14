@@ -1,3 +1,59 @@
 <resources>
     <string name="app_name">GameSetMatch</string>
+    <string name="ustawienia_profilu">Ustawienia Profilu</string>
+    <string name="dane_gracza">Dane gracza</string>
+    <string name="twoja_nazwa_imi">Twoja nazwa / Imię</string>
+    <string name="tw_j_sprz_t">Twój sprzęt</string>
+    <string name="model_rakiety">Model rakiety</string>
+    <string name="buty">Buty</string>
+    <string name="torba">Torba</string>
+    <string name="zapisz_profil">ZAPISZ PROFIL</string>
+    <string name="dodaj_wynik">Dodaj Wynik</string>
+    <string name="ok">OK</string>
+    <string name="anuluj">Anuluj</string>
+    <string name="przeciwnik">PRZECIWNIK</string>
+    <string name="imi_przeciwnika">Imię przeciwnika</string>
+    <string name="data_meczu">DATA MECZU</string>
+    <string name="wybierz_dat">Wybierz datę</string>
+    <string name="np_6_4_7_5">np. 6:4, 7:5</string>
+    <string name="wynik_w_setach">WYNIK W SETACH</string>
+    <string name="czy_wygra_e">CZY WYGRAŁEŚ?</string>
+    <string name="zapisz_wynik">ZAPISZ WYNIK</string>
+    <string name="moje_mecze">Moje Mecze</string>
+    <string name="cze">Cześć</string>
+    <string name="gotowy_na_kort">Gotowy na kort?</string>
+    <string name="rozpocznij_trening">Rozpocznij\nTrening</string>
+    <string name="ostatni_mecz">Ostatni mecz</string>
+    <string name="nauka_techniki">Nauka techniki</string>
+    <string name="forehand">Forehand</string>
+    <string name="backhand">Backhand</string>
+    <string name="serwis">Serwis</string>
+    <string name="podstawa_uderze">Backhand to podstawowe uderzenie z głębi kortu, wykonywane jednoręcznie lub oburęcznie. Jego skuteczność opiera się na płynnym skręcie tułowia, który inicjuje cały ruch, oraz na odpowiednim odprowadzeniu rakiety po kontakcie z piłką. Właśnie ta sekwencja — rotacja ciała i kontrolowane wykończenie — zapewnia stabilność, kierunek oraz powtarzalność uderzenia, nawet przy szybkim tempie wymiany.</string>
+    <string name="jednor_czny_lub_obur_czny">Forhend to podstawowe uderzenie w tenisie, wykonywane jednoręcznie lub oburęcznie, zależnie od stylu gracza. Kluczowym elementem techniki jest domknięcie uderzenia przed osią ciała, dzięki czemu ruch pozostaje czysty, kontrolowany i stabilny. Właśnie to właściwe wykończenie pozwala generować pewną, powtarzalną piłkę i utrzymać pełną kontrolę nad kierunkiem oraz tempem zagrania.</string>
+    <string name="najwa_niejsze_uderzenie">Serwis to najważniejsze uderzenie w tenisie ziemnym, ponieważ jako jedyne pozwala zawodnikowi w pełni kontrolować początek każdej wymiany. To od jakości serwisu zależy, czy gracz od razu zyska przewagę, zmusi rywala do defensywy, a czasem nawet zdobędzie punkt bez konieczności dalszej gry. Kluczową rolę odgrywa tutaj płynny, stabilny wyrzut piłki, który stanowi fundament powtarzalności. Jeśli toss jest zawsze taki sam, całe uderzenie staje się bardziej przewidywalne i technicznie czystsze.</string>
+    <string name="zdj_cie">Zdjęcie</string>
+    <string name="brak_zdj_cia_galerii">Brak zdjęcia galerii</string>
+    <string name="rakieta">RAKIETA</string>
+    <string name="Butyty">BUTY</string>
+    <string name="torbab">TORBA</string>
+    <string name="zasada">zasada</string>
+    <string name="m_j_sprz_t">Mój Sprzęt</string>
+
+    <string name="zasady_i_audio">ZASADY &amp; AUDIO</string>
+    <string name="zasady_gry">ZASADY GRY</string>
+
+    <string name="punktacja_tytul">PUNKTACJA</string>
+    <string name="punktacja_opis">Mecz dzieli się na sety, a sety na gemy. Punkty w gemie liczymy jako: 15, 30, 40, Gem. Przy stanie 40:40 (Równowaga) potrzeba przewagi, aby wygrać gema.</string>
+
+    <string name="serwis_tytul">SERWIS</string>
+    <string name="serwis_opis">Serwujący ma dwie próby. Błąd serwisowy (Fault) oznacza powtórkę. Podwójny błąd to utrata punktu.</string>
+
+    <string name="tie_break_tytul">TIE-BREAK</string>
+    <string name="tie_break_opis">Przy stanie 6:6 gra się do 7 punktów, z zachowaniem dwóch punktów przewagi (np. 7:5).</string>
+
+    <string name="glos_sedziego">GŁOS SĘDZIEGO</string>
+    <string name="symulacja_meczu">SYMULACJA MECZU</string>
+    <string name="sciezka_dzwiekowa">ŚCIEŻKA DŹWIĘKOWA</string>
+    <string name="obejrzyj_wideo">Obejrzyj wideo</string>
+    <string name="galeria_ruchu">Galeria Ruchu</string>
 </resources>

@@ -11,7 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.gamesetmatch.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -20,7 +24,8 @@ import java.util.Locale
 @Composable
 fun DodajMeczScreen(
     onNavigateBack: () -> Unit,
-    viewModel: MeczeViewModel
+    viewModel: MeczeViewModel,
+    name: String
 ) {
     val context = LocalContext.current
     var przeciwnik by remember { mutableStateOf("") }
@@ -48,12 +53,12 @@ fun DodajMeczScreen(
                     }
                     showDatePicker = false
                 }) {
-                    Text("OK")
+                    Text(stringResource(R.string.ok))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDatePicker = false }) {
-                    Text("Anuluj")
+                    Text(stringResource(R.string.anuluj))
                 }
             }
         ) {
@@ -61,37 +66,51 @@ fun DodajMeczScreen(
         }
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("DODAJ WYNIK") },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Wstecz")
-                    }
+    Column(modifier = Modifier.fillMaxSize()) {
+        ListItem(
+            colors = ListItemDefaults.colors(Color.Transparent),
+            headlineContent = {
+                Text(
+                    text = name,
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            leadingContent = {
+                IconButton(
+                    onClick =
+                        onNavigateBack
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
                 }
-            )
-        }
-    ) { padding ->
+            }
+        )
+
+
         Column(
-            modifier = Modifier.padding(padding).padding(16.dp).fillMaxSize(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("PRZECIWNIK")
+            Text(stringResource(R.string.przeciwnik))
             OutlinedTextField(
                 value = przeciwnik,
                 onValueChange = { przeciwnik = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Imię przeciwnika") }
+                placeholder = { Text(stringResource(R.string.imi_przeciwnika)) }
             )
 
-            Text("DATA MECZU")
+            Text(stringResource(R.string.data_meczu))
             Box(modifier = Modifier.fillMaxWidth()) {
                 OutlinedTextField(
                     value = dataMeczu,
                     onValueChange = { },
                     modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("Wybierz datę") },
+                    placeholder = { Text(stringResource(R.string.wybierz_dat)) },
                     readOnly = true, // Użytkownik nie może pisać z klawiatury
                     enabled = true
                 )
@@ -102,12 +121,12 @@ fun DodajMeczScreen(
                 )
             }
 
-            Text("WYNIK W SETACH")
+            Text(stringResource(R.string.wynik_w_setach))
             OutlinedTextField(
                 value = wynik,
                 onValueChange = { wynik = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("np. 6:4, 7:5") }
+                placeholder = { Text(stringResource(R.string.np_6_4_7_5)) }
             )
 
             Row(
@@ -115,11 +134,11 @@ fun DodajMeczScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("CZY WYGRAŁEŚ?")
+                Text(stringResource(R.string.czy_wygra_e))
                 Switch(
                     checked = czyWygrany,
                     onCheckedChange = { czyWygrany = it },
-                    colors = SwitchDefaults.colors(checkedThumbColor = Color(0xFFC5FF2D))
+                    colors = SwitchDefaults.colors(checkedThumbColor = MaterialTheme.colorScheme.secondary)
                 )
             }
 
@@ -129,15 +148,19 @@ fun DodajMeczScreen(
                 onClick = {
                     viewModel.addMatchWithValidation(
                         przeciwnik, wynik, dataMeczu, czyWygrany,
-                        onError = { error -> Toast.makeText(context, error, Toast.LENGTH_SHORT).show() },
+                        onError = { error ->
+                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                        },
                         onSuccess = { onNavigateBack() }
                     )
                 },
-                modifier = Modifier.fillMaxWidth().height(56.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFC5FF2D))
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
             ) {
-                Text("ZAPISZ WYNIK", color = Color.Black)
+                Text(stringResource(R.string.zapisz_wynik), color = MaterialTheme.colorScheme.scrim)
             }
         }
     }
-}
+    }

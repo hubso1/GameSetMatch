@@ -19,89 +19,143 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.ArrowCircleRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.gamesetmatch.R
 import com.example.gamesetmatch.data.MeczEntity
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.offset
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.draw.rotate
+import androidx.compose.runtime.getValue
 
 @Composable
 fun GlownyScreen(viewModel: GlownaViewModel,
-                 onNavigateToMecze: () -> Unit,
+                 onNavigateToNauka: () -> Unit,
                  onNavigateToUStawienia: () -> Unit
                  ) {
 
-    val kort = viewModel.kort
-    val trening = viewModel.trening
-    val ostatni = viewModel.ostatni
     val match = viewModel.match
 
+    // ANIMACJA 1 - strzałka
+    val infiniteTransition = rememberInfiniteTransition()
+    val offsetX = infiniteTransition.animateFloat(
+        initialValue = 3f,
+        targetValue = -3f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "PulsingArrowAnimation"
+    )
+
+    // ANIMACJA 2 - zębatka
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+
+    val rotationAngle by animateFloatAsState(
+        targetValue = if (isPressed) 180f else 0f,
+        animationSpec = tween(durationMillis = 500),
+        label = "GearRotation"
+    )
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Top,
         ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
 
-        ) {
-            Column(
-                verticalArrangement = Arrangement.Center
+        ListItem(
+            headlineContent = {
+                Text(
+                    "${stringResource(R.string.cze)} \n${viewModel.name}",
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.Bold
                 )
-            {
-                Text(viewModel.hi, fontSize = 30.sp, fontWeight = FontWeight.Bold)
-                Text(viewModel.name, fontSize = 30.sp, fontWeight = FontWeight.Bold)
-                Text(kort, fontSize = 15.sp)
-            }
-
-            IconButton(
-                onClick = onNavigateToUStawienia ,
-
-                ) {
-                Icon(
-                    Icons.Default.Settings,
-                    contentDescription = null,
-                    Modifier.size(35.dp)
+            },
+            supportingContent = {
+                Text(
+                    stringResource(R.string.gotowy_na_kort),
+                    fontSize = 15.sp
                 )
+            },
+            trailingContent = {
+                IconButton(onClick = onNavigateToUStawienia, interactionSource = interactionSource) {
+                    Icon(
+                        Icons.Default.Settings,
+                        contentDescription = "",
+                        modifier = Modifier.size(30.dp).rotate(rotationAngle)
+                    )
                 }
-
-
-        }
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = Color.Transparent,
+                headlineColor = MaterialTheme.colorScheme.scrim,
+                supportingColor = MaterialTheme.colorScheme.scrim,
+                trailingIconColor = MaterialTheme.colorScheme.scrim
+            )
+        )
         Spacer(modifier = Modifier.height(20.dp))
-        Row(
-            modifier = Modifier.background(color = Color(0xFFCBFF5B), shape = RoundedCornerShape(16.dp))
-                .padding(16.dp)
+        Card(
+            modifier = Modifier
                 .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
+            colors = CardDefaults.cardColors(
+                containerColor = Color.Transparent
+            ),
 
+            shape = RoundedCornerShape(16.dp)
         ) {
-            Text(trening, fontSize = 20.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(5.dp))
-            IconButton(
-                onClick = onNavigateToMecze,
-                Modifier.size(45.dp)
-                ) {
-                Icon(
-                    Icons.Outlined.ArrowCircleRight,
-                    contentDescription = null,
-                    Modifier.size(45.dp)
+            ListItem(
+                headlineContent = {
+                    Text(stringResource(R.string.rozpocznij_trening), fontSize = 20.sp, fontWeight = FontWeight.Bold ,modifier = Modifier.padding(5.dp))
+                },
+
+                trailingContent = {
+                    IconButton(
+                        onClick = onNavigateToNauka,
+                        Modifier.size(45.dp)
+                    ) {
+                        Icon(
+                            Icons.Outlined.ArrowCircleRight,
+                            contentDescription = null,
+                            Modifier.size(45.dp).offset(x = offsetX.value.dp)
+                        )
+                    }
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.secondary,
+                    headlineColor = MaterialTheme.colorScheme.scrim,
+                    trailingIconColor = MaterialTheme.colorScheme.scrim
                 )
-            }
+            )
         }
+
         Spacer(modifier = Modifier.height(20.dp))
-        Text(ostatni, fontSize = 20.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(5.dp))
+        Text(stringResource(R.string.ostatni_mecz), fontSize = 20.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(5.dp))
         if (match != null)
             lastmatchCard(match)
 
@@ -113,13 +167,15 @@ fun GlownyScreen(viewModel: GlownaViewModel,
 fun lastmatchCard(lastmach: MeczEntity){
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1E1E))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary)
     ) {
-        Box(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+        Box(modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()) {
             Column {
                 Text(
                     text = lastmach.data,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     style = MaterialTheme.typography.bodySmall
                 )
 
@@ -129,14 +185,14 @@ fun lastmatchCard(lastmach: MeczEntity){
                 ) {
                     Text(
                         text = "VS ${lastmach.przeciwnik.uppercase()}",
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
 
                     Spacer(modifier = Modifier.width(16.dp))
 
                     Text(
                         text = lastmach.wynik,
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.titleMedium
                     )
                 }
@@ -147,7 +203,7 @@ fun lastmatchCard(lastmach: MeczEntity){
                 Box(
                     modifier = Modifier
                         .size(10.dp)
-                        .background(Color(0xFFC5FF2D), CircleShape)
+                        .background(MaterialTheme.colorScheme.secondary, CircleShape)
                         .align(Alignment.CenterEnd)
                         .padding(end = 4.dp)
                 )
@@ -160,7 +216,7 @@ fun lastmatchCard(lastmach: MeczEntity){
 @Composable
 fun Compose_test(){
     val vm: GlownaViewModel = hiltViewModel()
-    GlownyScreen(viewModel = vm,onNavigateToMecze = {},
+    GlownyScreen(viewModel = vm, onNavigateToNauka = {},
         onNavigateToUStawienia = {})
 
 }

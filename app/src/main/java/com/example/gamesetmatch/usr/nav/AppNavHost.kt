@@ -3,6 +3,7 @@ package com.example.gamesetmatch.usr.nav
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,6 +15,9 @@ import com.example.gamesetmatch.usr.mecze.DodajMeczScreen
 import com.example.gamesetmatch.usr.mecze.MeczeScreen
 import com.example.gamesetmatch.usr.mecze.MeczeViewModel
 import com.example.gamesetmatch.usr.nauka.NaukaScreen
+import com.example.gamesetmatch.usr.nauka.SegmentScreen
+import com.example.gamesetmatch.usr.nauka.SegmentViewmodel
+import com.example.gamesetmatch.usr.nauka.SegmetType
 import com.example.gamesetmatch.usr.sprzet.SprzetScreen
 import com.example.gamesetmatch.usr.sprzet.SprzetViewModel
 import com.example.gamesetmatch.usr.zasady.ZasadyScreen
@@ -30,44 +34,79 @@ fun AppNavHost(navController: NavHostController) {
             val vm: GlownaViewModel = hiltViewModel()
             GlownyScreen(
                 viewModel = vm,
-                onNavigateToMecze = { navController.navigate("mecze")},
-                onNavigateToUStawienia = { navController.navigate("set_glowny_screen")}
+                onNavigateToNauka = { navController.navigate(NavItem.Nauka.route)},
+                onNavigateToUStawienia = { navController.navigate(NavItem.Ustawienia.route)}
             )
         }
-        composable( "set_glowny_screen" ) {
+        composable(NavItem.Ustawienia.route ) {
             val vm: GlownaViewModel = hiltViewModel()
             SetGlownyScreen(
-                navController = navController,
-                viewModel = vm
+                onNavigateBack = { navController.popBackStack() },
+                viewModel = vm,
+                name = NavItem.Ustawienia.label
             )
         }
         composable(NavItem.Nauka.route) { NaukaScreen(
-            onNavigatetoForehand = { navController.navigate("sprzet")},
-            onNavigatetoBackhand = { navController.navigate("sprzet")},
-            onNavigatetoSerwis = {navController.navigate("sprzet")}
+            onNavigatetoForehand = { navController.navigate(NavItem.Forehand.route)},
+            onNavigatetoBackhand = { navController.navigate(NavItem.Backhand.route)},
+            onNavigatetoSerwis = {navController.navigate(NavItem.Serwis.route)}
         )
+        }
+        composable(NavItem.Forehand.route) {
+            val vm: SegmentViewmodel = viewModel()
+            vm.updateSegment(SegmetType.Forehand)
+            SegmentScreen(
+                onNavigateBack = { navController.popBackStack() },
+                viewModel = vm,
+                name = NavItem.Forehand.label
+
+            )
+
+        }
+        composable(NavItem.Backhand.route) {
+            val vm: SegmentViewmodel = viewModel()
+            vm.updateSegment(SegmetType.Backhand)
+            SegmentScreen(
+                onNavigateBack = { navController.popBackStack() },
+                viewModel = vm,
+                name = NavItem.Backhand.label
+
+            )
+
+        }
+        composable(NavItem.Serwis.route) {
+            val vm: SegmentViewmodel = viewModel()
+            vm.updateSegment(SegmetType.Serwis)
+            SegmentScreen(
+                onNavigateBack = { navController.popBackStack() },
+                viewModel = vm,
+                name = NavItem.Serwis.label
+
+
+            )
+
         }
 
         composable(NavItem.Mecze.route) {
             val vm: MeczeViewModel = hiltViewModel()
             MeczeScreen(
                 viewModel = vm,
-                onNavigateToAdd = { navController.navigate("dodaj_mecz") },
+                onNavigateToAdd = { navController.navigate(NavItem.DodajMecz.route) },
             )
         }
 
-        composable("dodaj_mecz") {
+        composable(NavItem.DodajMecz.route) {
             val vm: MeczeViewModel = hiltViewModel()
             DodajMeczScreen(
                 viewModel = vm,
                 onNavigateBack = { navController.popBackStack() },
+                name = NavItem.DodajMecz.label
             )
         }
 
         composable(NavItem.Sprzet.route) {
             val vm : SprzetViewModel = hiltViewModel()
             SprzetScreen(
-                navController = navController,
                 viewModel = vm
             )
         }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -14,8 +15,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.gamesetmatch.R
 import com.example.gamesetmatch.data.MeczEntity
+import com.example.gamesetmatch.usr.nav.NavItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -25,27 +31,47 @@ fun MeczeScreen(
 ) {
     // Tutaj pobieramy dane z bazy danych przez ViewModel
     val matches by viewModel.allMatches.collectAsState(initial = emptyList())
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp),
+        verticalArrangement = Arrangement.Top,) {
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text("MOJE MECZE", style = MaterialTheme.typography.headlineMedium) },
-                actions = {
-                    // Przycisk plusa przenoszący do DodajMeczScreen
-                    IconButton(onClick = onNavigateToAdd) {
-                        Icon(Icons.Default.AddCircle, "Dodaj", modifier = Modifier.size(32.dp))
-                    }
+        ListItem(
+            headlineContent = {
+                Text(
+                    stringResource(R.string.moje_mecze),
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            },
+
+            trailingContent = {
+                IconButton(onClick = onNavigateToAdd) {
+                    Icon(
+                        NavItem.DodajMecz.icon,
+                        contentDescription = "",
+                        modifier = Modifier.size(30.dp)
+                    )
                 }
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = Color.Transparent,
+                headlineColor = MaterialTheme.colorScheme.scrim,
+                supportingColor = MaterialTheme.colorScheme.scrim,
+                trailingIconColor = MaterialTheme.colorScheme.scrim
             )
-        }
-    ) { padding ->
-        // Wywołujemy listę i przekazujemy jej padding z paska górnego
+        )
         MeczeListContent(
             matches = matches,
-            modifier = Modifier.padding(padding)
+            modifier = Modifier.padding(16.dp)
         )
     }
-}
+
+
+
+    }
+
+
 
 @Composable
 fun MeczeListContent(
@@ -54,8 +80,8 @@ fun MeczeListContent(
 ) {
     Column(
         modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .fillMaxSize(),
+
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LazyColumn(
@@ -65,13 +91,15 @@ fun MeczeListContent(
             items(matches) { match ->
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1E1E))
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary)
                 ) {
-                    Box(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+                    Box(modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth()) {
                         Column {
                             Text(
                                 text = match.data,
-                                color = Color.Gray,
+                                color = MaterialTheme.colorScheme.onPrimary,
                                 style = MaterialTheme.typography.bodySmall
                             )
 
@@ -81,14 +109,14 @@ fun MeczeListContent(
                             ) {
                                 Text(
                                     text = "VS ${match.przeciwnik.uppercase()}",
-                                    color = Color.White
+                                    color = MaterialTheme.colorScheme.onPrimary
                                 )
 
                                 Spacer(modifier = Modifier.width(16.dp))
 
                                 Text(
                                     text = match.wynik,
-                                    color = Color.White,
+                                    color = MaterialTheme.colorScheme.onPrimary,
                                     style = MaterialTheme.typography.titleMedium
                                 )
                             }
@@ -99,7 +127,7 @@ fun MeczeListContent(
                             Box(
                                 modifier = Modifier
                                     .size(10.dp)
-                                    .background(Color(0xFFC5FF2D), CircleShape)
+                                    .background(MaterialTheme.colorScheme.secondary, CircleShape)
                                     .align(Alignment.CenterEnd)
                                     .padding(end = 4.dp)
                             )
