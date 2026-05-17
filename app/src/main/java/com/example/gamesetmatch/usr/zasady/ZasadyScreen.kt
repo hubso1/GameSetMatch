@@ -22,6 +22,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gamesetmatch.R
 import android.media.MediaPlayer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.material.icons.filled.Stop
+import androidx.compose.runtime.*
 
 private data class ZasadaItem(
     @StringRes val tytulResId: Int,
@@ -40,6 +42,14 @@ private val zasadyGry = listOf(
 fun ZasadyScreen(viewModel: ZasadyViewModel = viewModel()) {
 
     val context = LocalContext.current
+    var isPlaying by remember { mutableStateOf(false)}
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            mediaPlayer?.release()
+        }
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -112,14 +122,29 @@ fun ZasadyScreen(viewModel: ZasadyViewModel = viewModel()) {
                         .clip(CircleShape)
                         .background(MaterialTheme.colorScheme.tertiary)
                         .clickable {
-                            val mediaPlayer = MediaPlayer.create(context, R.raw.audio)
-                            mediaPlayer.setOnCompletionListener { it.release() }
-                            mediaPlayer.start() },
+                            // logika kliknięcia
+                            if (isPlaying) {
+                                mediaPlayer?.stop()
+                                mediaPlayer?.release()
+                                mediaPlayer = null
+                                isPlaying = false
+                            } else {
+                                mediaPlayer = MediaPlayer.create(context, R.raw.audio)
+
+                                mediaPlayer?.setOnCompletionListener {
+                                    it.release()
+                                    isPlaying = false
+                                }
+
+                                mediaPlayer?.start()
+                                isPlaying = true
+                            }
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Filled.PlayArrow,
-                        contentDescription = "Odtwórz",
+                        imageVector = if (isPlaying) Icons.Filled.Stop else Icons.Filled.PlayArrow,
+                        contentDescription = if (isPlaying) "Zatrzymaj" else "Odtwórz",
                         tint = MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.size(64.dp)
                     )
