@@ -14,7 +14,6 @@ class MeczeViewModel @Inject constructor(
 ) : ViewModel() {
     val allMatches = repository.allMatches
 
-    // Główna funkcja z logiką walidacji
     fun addMatchWithValidation(
         opponent: String,
         score: String,
@@ -23,20 +22,19 @@ class MeczeViewModel @Inject constructor(
         onError: (String) -> Unit,
         onSuccess: () -> Unit
     ) {
-        // 1. Walidacja czy pola nie są puste
         if (opponent.isBlank() || score.isBlank() || date.isBlank()) {
             onError("Wszystkie pola muszą być wypełnione")
             return
         }
 
-        // 2. Walidacja Daty (Format DD.MM.RRRR) # do poprawy
+        // Walidacja Daty
         val dateRegex = """\d{2}\.\d{2}\.\d{4}""".toRegex()
         if (!dateRegex.matches(date)) {
             onError("Data musi być w formacie DD.MM.RRRR")
             return
         }
 
-        // 3. Walidacja Wyniku (Reguły tenisa)
+        // Walidacja Wyniku
         try {
             val sets = score.split(",").map { it.trim() }
             if (sets.size > 5) {

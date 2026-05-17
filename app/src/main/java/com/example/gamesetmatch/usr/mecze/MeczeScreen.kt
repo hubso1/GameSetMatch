@@ -26,8 +26,8 @@ import com.example.gamesetmatch.usr.nav.NavItem
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MeczeScreen(
-    onNavigateToAdd: () -> Unit, // Parametr dla AppNavHost
-    viewModel: MeczeViewModel    // Parametr dla AppNavHost
+    onNavigateToAdd: () -> Unit,
+    viewModel: MeczeViewModel
 ) {
     // Tutaj pobieramy dane z bazy danych przez ViewModel
     val matches by viewModel.allMatches.collectAsState(initial = emptyList())
