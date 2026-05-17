@@ -39,7 +39,6 @@ import com.example.gamesetmatch.usr.nav.NavItem
 //Ui dla ekranu Nauka
 @Composable
 fun NaukaScreen(
-    viewModel: NaukaViewModel = viewModel(),
     onNavigatetoForehand: () -> Unit,
     onNavigatetoBackhand: () -> Unit,
     onNavigatetoSerwis: () -> Unit

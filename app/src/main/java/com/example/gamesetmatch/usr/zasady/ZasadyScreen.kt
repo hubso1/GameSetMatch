@@ -39,7 +39,7 @@ private val zasadyGry = listOf(
 
 // Ui dla ekranu Zasady
 @Composable
-fun ZasadyScreen(viewModel: ZasadyViewModel = viewModel()) {
+fun ZasadyScreen() {
 
     val context = LocalContext.current
     var isPlaying by remember { mutableStateOf(false)}
